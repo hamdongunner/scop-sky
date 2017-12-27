@@ -11,8 +11,26 @@
 |
 */
 
-Route::get('/', function () {
-    return view('app.index');
-});
+Route::get('/', 'HomeController@index');
+
+
+Route::get('wireless','HomeController@getWirelessView');
+
+Route::get('ftth','HomeController@getFtthView')->middleware('customer');
+
+Route::get('login','HomeController@loginView');
+
+Route::post('login','HomeController@login');
+
+Route::get('dashboard','DashController@index')->middleware('admin');;
+
+Route::get('dashboard/orders','DashController@orders');
+
+Route::get('dashboard/cards','DashController@cards');
+
+Route::get('dashboard/companies','DashController@companies');
+
+Route::get('dashboard/ftth','DashController@ftth');
+
 
 Route::get('order','OrderController@get');
