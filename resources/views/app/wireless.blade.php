@@ -4,7 +4,7 @@
 @section('content')
 
 
-    <div class="main-panel">
+    <div id="root" class="main-panel">
         <div class="content">
             <div class="container-fluid">
 
@@ -19,18 +19,22 @@
                                 <p class="category">.</p>
                                 <h3 class="card-title">The Wireless cards</h3>
                             </div>
-                            {{--<div class="card-footer">--}}
-                                {{--<div class="stats">--}}
-                                    {{--<i class="material-icons">update</i> Just Updated--}}
-                                {{--</div>--}}
-                            {{--</div>--}}
                         </div>
                     </div>
                 </div>
                 {{--<h3>Manage Listings</h3>--}}
+                {{--@if(session()->has('cart'))--}}
+                    {{--<div class="alert alert-solid alert-danger" role="alert">--}}
+                        {{--<button type="button" class="close" data-dismiss="alert" aria-label="Close">--}}
+                            {{--<span aria-hidden="true">&times;</span>--}}
+                        {{--</button>--}}
+                        {{--<h5 style="color: white" class="text-center">{{ session()->get('cart') }}</h5>--}}
+                    {{--</div>--}}
+                {{--@endif--}}
                 <br>
                 <div class="row">
-                    <div class="col-md-4">
+                    {{--@foreach($cards as $card)--}}
+                    <div v-for="(product,index) in products" class="col-md-4">
                         <div class="card card-product">
                             <div class="card-image" data-header-animation="true">
                                 <a href="#pablo">
@@ -46,9 +50,9 @@
                                             data-placement="bottom" title="View">
                                         <i class="material-icons">art_track</i>
                                     </button>
-                                    <button type="button" class="btn btn-success btn-simple" rel="tooltip"
+                                    <button @click="addToCart(product.id)" type="button" class="btn btn-success btn-simple" rel="tooltip"
                                             data-placement="bottom" title="Edit">
-                                        <i class="material-icons">edit</i>
+                                        <i class="material-icons">add</i>
                                     </button>
                                     <button type="button" class="btn btn-danger btn-simple" rel="tooltip"
                                             data-placement="bottom" title="Remove">
@@ -73,92 +77,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4">
-                        <div class="card card-product">
-                            <div class="card-image" data-header-animation="true">
-                                <a href="#pablo">
-                                    <img class="img" src="../assets/img/card-3.jpeg">
-                                </a>
-                            </div>
-                            <div class="card-content">
-                                <div class="card-actions">
-                                    <button type="button" class="btn btn-danger btn-simple fix-broken-card">
-                                        <i class="material-icons">build</i> Fix Header!
-                                    </button>
-                                    <button type="button" class="btn btn-default btn-simple" rel="tooltip"
-                                            data-placement="bottom" title="View">
-                                        <i class="material-icons">art_track</i>
-                                    </button>
-                                    <button type="button" class="btn btn-success btn-simple" rel="tooltip"
-                                            data-placement="bottom" title="Edit">
-                                        <i class="material-icons">edit</i>
-                                    </button>
-                                    <button type="button" class="btn btn-danger btn-simple" rel="tooltip"
-                                            data-placement="bottom" title="Remove">
-                                        <i class="material-icons">close</i>
-                                    </button>
-                                </div>
-                                <h4 class="card-title">
-                                    <a href="#pablo">Office Studio</a>
-                                </h4>
-                                <div class="card-description">
-                                    The place is close to Metro Station and bus stop just 2 min by walk and near to
-                                    "Naviglio" where you can enjoy the night life in London, UK.
-                                </div>
-                            </div>
-                            <div class="card-footer">
-                                <div class="price">
-                                    <h4>$1.119/night</h4>
-                                </div>
-                                <div class="stats pull-right">
-                                    <p class="category"><i class="material-icons">place</i> London, UK</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="card card-product">
-                            <div class="card-image" data-header-animation="true">
-                                <a href="#pablo">
-                                    <img class="img" src="../assets/img/card-1.jpeg">
-                                </a>
-                            </div>
-                            <div class="card-content">
-                                <div class="card-actions">
-                                    <button type="button" class="btn btn-danger btn-simple fix-broken-card">
-                                        <i class="material-icons">build</i> Fix Header!
-                                    </button>
-                                    <button type="button" class="btn btn-default btn-simple" rel="tooltip"
-                                            data-placement="bottom" title="View">
-                                        <i class="material-icons">art_track</i>
-                                    </button>
-                                    <button type="button" class="btn btn-success btn-simple" rel="tooltip"
-                                            data-placement="bottom" title="Edit">
-                                        <i class="material-icons">edit</i>
-                                    </button>
-                                    <button type="button" class="btn btn-danger btn-simple" rel="tooltip"
-                                            data-placement="bottom" title="Remove">
-                                        <i class="material-icons">close</i>
-                                    </button>
-                                </div>
-                                <h4 class="card-title">
-                                    <a href="#pablo">Beautiful Castle</a>
-                                </h4>
-                                <div class="card-description">
-                                    The place is close to Metro Station and bus stop just 2 min by walk and near to
-                                    "Naviglio" where you can enjoy the main night life in Milan.
-                                </div>
-                            </div>
-                            <div class="card-footer">
-                                <div class="price">
-                                    <h4>$459/night</h4>
-                                </div>
-                                <div class="stats pull-right">
-                                    <p class="category"><i class="material-icons">place</i> Milan, Italy</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    {{--@endforeach--}}
                 </div>
             </div>
         </div>
@@ -181,13 +100,15 @@
                 </nav>
                 <p class="copyright pull-left">
                     &copy;
-                    <script>
-                        document.write(new Date().getFullYear())
-                    </script>
                     <a href="https://www.zaincash.iq/">Zaincash</a> iraqi wallet
                 </p>
             </div>
         </footer>
     </div>
 
+@endsection
+
+
+@section('js')
+    <script src="vue/main.js"></script>
 @endsection

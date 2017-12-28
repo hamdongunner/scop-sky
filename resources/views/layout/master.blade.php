@@ -22,7 +22,9 @@
     <title>ScopSky</title>
 </head>
 <body>
+<div>
 @yield('content')
+</div>
 </body>
 <script src="../../assets/js/jquery-3.2.1.min.js" type="text/javascript"></script>
 <script src="../../assets/js/bootstrap.min.js" type="text/javascript"></script>
@@ -76,4 +78,8 @@
         }, 700)
     });
 </script>
+<script src="https://unpkg.com/vue@2.4.2"></script>
+
+@yield('js')
+
 </html>

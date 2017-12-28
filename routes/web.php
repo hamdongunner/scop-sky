@@ -4,13 +4,14 @@
  |--------------------------------------------------------------------------
  |     AUTHLESS     AUTHLESS     AUTHLESS     AUTHLESS     AUTHLESS
  |--------------------------------------------------------------------------
- */
-//APP
+ *///---------------------------------------------APP
 Route::get('/', 'HomeController@index');
+Route::get('get-cards', 'HomeController@getCards');
+Route::get('cart/add/{id}', 'HomeController@cardAdd');
 Route::get('wireless','HomeController@getWirelessView');
 Route::get('login','HomeController@loginView');
 Route::post('login','HomeController@login');
-//DASHBOARD
+//-----------------------------------------------DASHBOARD
 Route::get('/auth','DashController@authView');
 Route::post('/auth','DashController@authAdmin');
 /*
