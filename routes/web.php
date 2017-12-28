@@ -1,36 +1,39 @@
 <?php
 
 /*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
+ |--------------------------------------------------------------------------
+ |     AUTHLESS     AUTHLESS     AUTHLESS     AUTHLESS     AUTHLESS
+ |--------------------------------------------------------------------------
+ */
+//APP
 Route::get('/', 'HomeController@index');
-
-
 Route::get('wireless','HomeController@getWirelessView');
-
-Route::get('ftth','HomeController@getFtthView')->middleware('customer');
-
 Route::get('login','HomeController@loginView');
-
 Route::post('login','HomeController@login');
+//DASHBOARD
+Route::get('/auth','DashController@authView');
+Route::post('/auth','DashController@authAdmin');
+/*
+ |--------------------------------------------------------------------------
+ |     CUSTOMER     CUSTOMER     CUSTOMER     CUSTOMER     CUSTOMER
+ |--------------------------------------------------------------------------
+ */
+Route::group(['middleware'=>'customer'], function () {
 
-Route::get('dashboard','DashController@index')->middleware('admin');;
+    Route::get('ftth','HomeController@getFtthView');
+});
 
-Route::get('dashboard/orders','DashController@orders');
+/*
+ |--------------------------------------------------------------------------
+ |     ADMIN     ADMIN     ADMIN     ADMIN     ADMIN     ADMIN     ADMIN
+ |--------------------------------------------------------------------------
+ */
 
-Route::get('dashboard/cards','DashController@cards');
+Route::group(['middleware'=>'admin','prefix' => 'dashboard'], function () {
 
-Route::get('dashboard/companies','DashController@companies');
-
-Route::get('dashboard/ftth','DashController@ftth');
-
-
-Route::get('order','OrderController@get');
+    Route::get('/','DashController@index');
+    Route::get('orders','DashController@orders');
+    Route::get('cards','DashController@cards');
+    Route::get('companies','DashController@companies');
+    Route::get('ftth','DashController@ftth');
+});

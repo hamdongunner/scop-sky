@@ -162,6 +162,9 @@
                 </div>
             </div>
         </div>
+        <form method="post" action="test">
+            <input value="" type="text">
+        </form>
         <footer class="footer">
             <div class="container">
                 <nav class="pull-left">

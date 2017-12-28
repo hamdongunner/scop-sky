@@ -39,7 +39,7 @@ class HomeController extends Controller
         if($validator->fails())
             return back()->withErrors($validator->errors())->withInput();
         $cred = $request->only('email','password');
-        if(Auth::guard('admin')->attempt($cred,true))
+        if(Auth::guard('app')->attempt($cred,true))
         {
 //            return Auth::user();
             return redirect('/ftth');

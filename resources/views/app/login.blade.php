@@ -9,35 +9,26 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-4 col-sm-6 col-md-offset-4 col-sm-offset-3">
-                            <form method="get" action="ftth">
+                            <form method="POST" action="ftth">
                                 <div class="card card-login card-hidden">
                                     <div class="card-header text-center" data-background-color="rose">
                                         <h4 class="card-title">Login</h4>
-                                        <div class="social-line">
-                                            <a href="#btn" class="btn btn-just-icon btn-simple">
-                                                <i class="fa fa-facebook-square"></i>
-                                            </a>
-                                            <a href="#pablo" class="btn btn-just-icon btn-simple">
-                                                <i class="fa fa-twitter"></i>
-                                            </a>
-                                            <a href="#eugen" class="btn btn-just-icon btn-simple">
-                                                <i class="fa fa-google-plus"></i>
-                                            </a>
-                                        </div>
+                                        {{--<div class="social-line">--}}
+                                            {{--<a href="#btn" class="btn btn-just-icon btn-simple">--}}
+                                                {{--<i class="fa fa-facebook-square"></i>--}}
+                                            {{--</a>--}}
+                                            {{--<a href="#pablo" class="btn btn-just-icon btn-simple">--}}
+                                                {{--<i class="fa fa-twitter"></i>--}}
+                                            {{--</a>--}}
+                                            {{--<a href="#eugen" class="btn btn-just-icon btn-simple">--}}
+                                                {{--<i class="fa fa-google-plus"></i>--}}
+                                            {{--</a>--}}
+                                        {{--</div>--}}
                                     </div>
                                     <p class="category text-center">
-                                        Or Be Classical
                                     </p>
                                     <div class="card-content">
-                                        <div class="input-group">
-                                            <span class="input-group-addon">
-                                                <i class="material-icons">face</i>
-                                            </span>
-                                            <div class="form-group label-floating">
-                                                <label class="control-label">First Name</label>
-                                                <input type="text" class="form-control">
-                                            </div>
-                                        </div>
+                                        <br><br>
                                         <div class="input-group">
                                             <span class="input-group-addon">
                                                 <i class="material-icons">email</i>
@@ -72,32 +63,23 @@
                         <ul>
                             <li>
                                 <a href="#">
-                                    Home
+                                    Zaincash
                                 </a>
                             </li>
                             <li>
                                 <a href="#">
-                                    Company
+                                    ScopeSky
                                 </a>
                             </li>
-                            <li>
-                                <a href="#">
-                                    Portfolio
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    Blog
-                                </a>
-                            </li>
+
                         </ul>
                     </nav>
-                    <p class="copyright pull-right">
+                    <p class="copyright pull-left">
                         &copy;
                         <script>
                             document.write(new Date().getFullYear())
                         </script>
-                        <a href="http://www.creative-tim.com">Creative Tim</a>, made with love for a better web
+                        <a href="https://www.zaincash.iq/">Zaincash</a> iraqi wallet
                     </p>
                 </div>
             </footer>
