@@ -31,14 +31,15 @@
                         {{--<h5 style="color: white" class="text-center">{{ session()->get('cart') }}</h5>--}}
                     {{--</div>--}}
                 {{--@endif--}}
+                @{{ shoppingCount }}
                 <br>
                 <div class="row">
                     {{--@foreach($cards as $card)--}}
-                    <div v-for="(product,index) in products" class="col-md-4">
+                    <div v-for="(product,index) in products" v-if="products" class="col-md-4">
                         <div class="card card-product">
                             <div class="card-image" data-header-animation="true">
                                 <a href="#pablo">
-                                    <img class="img" src="../assets/img/card-2.jpeg">
+                                    <img class="img" src="/assets/img/card-2.jpeg">
                                 </a>
                             </div>
                             <div class="card-content">
@@ -112,3 +113,5 @@
 @section('js')
     <script src="vue/main.js"></script>
 @endsection
+
+

@@ -1,6 +1,6 @@
 var app = new Vue({
     el: '#root',
-    data: {search: '', products: [], cart: [], complete: []},
+    data: {search: '', products: [], cart: [], complete: [],shoppingCount:0},
     methods: {
         getProducts: function () {
             $.ajax({
@@ -21,6 +21,15 @@ var app = new Vue({
                 success: function (results) {
                     console.log(results);
                     app.cart = results;
+                    keys = Object.keys(results);
+                    length = Object.keys(results).length;
+                    console.log('length is ', length);
+                    app.shoppingCount =0;
+                    for(i =0 ; i < length ; i++){
+                       app.shoppingCount = app.shoppingCount + app.cart[keys[i]].quantity;
+                        console.log('shoppingCount =',app.shoppingCount)
+                    }
+
                 }
             });
 
@@ -60,3 +69,6 @@ var app = new Vue({
         // this.getCart();
     }
 });
+
+
+

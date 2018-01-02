@@ -13,14 +13,13 @@ class HomeController extends Controller
 {
     public function index()
     {
+//        return 5;
         return view('app.index');
     }
 
     public function getWirelessView()
     {
-
-//      return Session::get('cart');
-        session()->flush();
+        Session::flush();
         return View('app.wireless');
     }
 
@@ -51,6 +50,7 @@ class HomeController extends Controller
     }
 
 //----------------------------VUE ROUTES---------------------------------//
+
     public function getCards()
     {
         return Card::all();
@@ -71,7 +71,6 @@ class HomeController extends Controller
         if($bool)
             $array[$id] = ['id'=>$id,'quantity'=>1];
 
-        echo $id;
         session()->put('cart', $array);
 //       session(['cart' => $array]);
         return Session::get('cart');
