@@ -19,8 +19,13 @@ class HomeController extends Controller
 
     public function getWirelessView()
     {
-        Session::flush();
+        session()->flush();
         return View('app.wireless');
+    }
+
+    public function checkoutView()
+    {
+        return Session::get('cart');
     }
 
     public function getFtthView()

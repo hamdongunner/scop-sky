@@ -9,10 +9,10 @@
             <div class="container-fluid">
 
                 <div style="margin-top: -40px;margin-bottom: 40px;" class="row">
-                    <div class="col-lg-3 col-md-6 col-sm-6">
+                    <div style="margin-bottom: -55px;" class="col-lg-3 col-md-6 col-sm-6">
                         <div class="card card-stats">
                             <div class="card-header" data-background-color="blue">
-                                <i class="material-icons">network_wifi</i>
+                                <a href="/checkout"><i class="material-icons">shopping_cart</i></a> @{{ shoppingCount }}
 
                             </div>
                             <div class="card-content">
@@ -31,7 +31,7 @@
                         {{--<h5 style="color: white" class="text-center">{{ session()->get('cart') }}</h5>--}}
                     {{--</div>--}}
                 {{--@endif--}}
-                @{{ shoppingCount }}
+
                 <br>
                 <div class="row">
                     {{--@foreach($cards as $card)--}}
@@ -61,19 +61,18 @@
                                     </button>
                                 </div>
                                 <h4 class="card-title">
-                                    <a href="#pablo">Cozy 5 Stars Apartment</a>
+                                    <a href="#pablo">@{{ product.name }}</a>
                                 </h4>
                                 <div class="card-description">
-                                    The place is close to Barceloneta Beach and bus stop just 2 min by walk and near to
-                                    "Naviglio" where you can enjoy the main night life in Barcelona.
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet asperiores
                                 </div>
                             </div>
                             <div class="card-footer">
                                 <div class="price">
-                                    <h4>$899/night</h4>
+                                    <h4>@{{ product.value }} $</h4>
                                 </div>
                                 <div class="stats pull-right">
-                                    <p class="category"><i class="material-icons">place</i> Barcelona, Spain</p>
+                                    {{--<p class="category"><i class="material-icons">place</i> Barcelona, Spain</p>--}}
                                 </div>
                             </div>
                         </div>

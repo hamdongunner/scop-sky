@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Card;
+use App\Company;
+use App\Customer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -15,7 +18,8 @@ class DashController extends Controller
 
     public function cards()
     {
-        return View('dashboard.cards');
+        $cards = Card::all();
+        return View('dashboard.cards',compact('cards'));
     }
 
     public function orders()
@@ -25,12 +29,14 @@ class DashController extends Controller
 
     public function companies()
     {
-        return View('dashboard.companies');
+        $companies = Company::all();
+        return View('dashboard.companies',compact('companies'));
     }
 
     public function ftth()
     {
-        return View('dashboard.ftth');
+        $customers = Customer::all();
+        return View('dashboard.ftth',compact('customers'));
     }
 
     public function authView()
