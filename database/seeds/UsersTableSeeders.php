@@ -17,6 +17,7 @@ class UsersTableSeeders extends Seeder
             DB::table('users')->insert([
                 'name' => 'scopeSky First Admin',
                 'email' => 'ScopeSkyAdmin@zaincash.iq',
+                'is_admin'=>1,
                 'password' => bcrypt('HaZC#$@'),
             ]);
         }else{

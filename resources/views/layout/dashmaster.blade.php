@@ -61,8 +61,8 @@
                         <p>Orders
                         </p>
                     </a>
-
                 </li>
+                @if(Auth::user()->is_admin == 1)
                 <li class="@yield('cards')">
                     <a href="/dashboard/cards">
                         <i class="material-icons">credit_card</i>
@@ -72,22 +72,23 @@
 
                 </li>
 
-                    <li class="@yield('companies')">
-                        <a href="/dashboard/companies">
-                            <i class="material-icons">store_mall_directory</i>
-                            <p>Companies
-                            </p>
-                        </a>
+                <li class="@yield('companies')">
+                    <a href="/dashboard/companies">
+                        <i class="material-icons">store_mall_directory</i>
+                        <p>Companies
+                        </p>
+                    </a>
 
-                    </li>
+                </li>
 
-                    <li class="@yield('ftth')">
-                        <a href="/dashboard/ftth">
-                            <i class="material-icons">settings_input_hdmi</i>
-                            <p>FTTH Resellers
-                            </p>
-                        </a>
-                    </li>
+                <li class="@yield('ftth')">
+                    <a href="/dashboard/ftth">
+                        <i class="material-icons">settings_input_hdmi</i>
+                        <p>FTTH Resellers
+                        </p>
+                    </a>
+                </li>
+                    @endif
             </ul>
         </div>
     </div>
@@ -124,10 +125,11 @@
                                 </p>
                             </a>
                             <ul class="dropdown-menu">
-
-                                    <li>
-                                        <a href="/dashboard/admins">Show Admins</a>
-                                    </li>
+                                @if(Auth::user()->is_admin == 1)
+                                <li>
+                                    <a href="/dashboard/admins">Show Admins</a>
+                                </li>
+                                @endif
                                 <li>
                                     <a href="/dashboard/logout">Logout</a>
                                 </li>
@@ -189,10 +191,10 @@
 <!-- Material Dashboard DEMO methods, don't include it in your project! -->
 <script src="/assets/js/demo.js"></script>
 <script type="text/javascript">
-    $().ready(function() {
+    $().ready(function () {
         demo.checkFullPageBackgroundImage();
 
-        setTimeout(function() {
+        setTimeout(function () {
             // after 1000 ms we add the class animated to the login/register card
             $('.card').removeClass('card-hidden');
         }, 700)

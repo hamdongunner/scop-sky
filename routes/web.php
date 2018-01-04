@@ -33,6 +33,16 @@ Route::group(['middleware'=>'customer'], function () {
 Route::group(['middleware'=>'admin','prefix' => 'dashboard'], function () {
     Route::get('/','DashController@index');
     Route::get('logout','DashController@logout');
+    ///---------------------------------------------ORDERS
+    Route::get('orders','DashController@orders');
+
+});
+/*
+ |--------------------------------------------------------------------------
+ |     SUPERADMIN     SUPERADMIN     SUPERADMIN     SUPERADMIN     SUPERADMIN
+ |--------------------------------------------------------------------------
+ */
+Route::group(['middleware'=>'superadmin','prefix' => 'dashboard'], function () {
     ///---------------------------------------------ADMINS
     Route::get('admins','DashController@admins');
     Route::get('admin/add','DashController@adminAddView');
@@ -40,8 +50,6 @@ Route::group(['middleware'=>'admin','prefix' => 'dashboard'], function () {
     Route::get('admin/delete/{id}','DashController@adminDelete');
     Route::get('admin/edit/{id}','DashController@adminEditView');
     Route::post('admin/edit/{id}','DashController@adminEdit');
-    ///---------------------------------------------ORDERS
-    Route::get('orders','DashController@orders');
     ///---------------------------------------------CARDS
     Route::get('cards','DashController@cards');
     Route::get('card/add','CardController@cardAddView');

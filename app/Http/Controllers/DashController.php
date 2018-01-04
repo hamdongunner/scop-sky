@@ -103,6 +103,7 @@ class DashController extends Controller
         $user = new User;
         $user->name = $request->name;
         $user->email = $request->email;
+        $user->is_admin = $request->is_admin;
         $user->password = bcrypt($request->password);
         $user->save();
         return redirect()->back()->with('message','You Have Been Added a New Admin');
@@ -130,6 +131,7 @@ class DashController extends Controller
         $user = User::find($id);
         $user->name = $request->name;
         $user->email = $request->email;
+        $user->is_admin = $request->is_admin;
         $user->password = bcrypt($request->password);
         $user->update();
         return redirect()->back()->with('message','You Have Been Edited The Admin');
