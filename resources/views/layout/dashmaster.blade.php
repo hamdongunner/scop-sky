@@ -57,7 +57,7 @@
                 </li>
                 <li class="@yield('orders')">
                     <a href="/dashboard/orders">
-                        <i class="material-icons">border_all</i>
+                        <i class="material-icons">shopping_cart</i>
                         <p>Orders
                         </p>
                     </a>
@@ -126,13 +126,10 @@
                             <ul class="dropdown-menu">
 
                                     <li>
-                                        <a href="/user">Add Admin</a>
-                                    </li>
-                                    <li>
-                                        <a href="/user/show">Show Admins</a>
+                                        <a href="/dashboard/admins">Show Admins</a>
                                     </li>
                                 <li>
-                                    <a href="/user/logout">Logout</a>
+                                    <a href="/dashboard/logout">Logout</a>
                                 </li>
                             </ul>
                         </li>

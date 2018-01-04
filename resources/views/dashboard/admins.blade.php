@@ -1,7 +1,7 @@
 @extends('layout.dashmaster')
 
 
-@section('orders')
+@section('dashboard')
     active
 @endsection
 
@@ -10,12 +10,19 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
+                    @if(session()->has('message'))
+                        <div class="alert alert-danger">
+                            {{ session()->get('message') }}
+                        </div>
+                    @endif
                     <div class="card">
+                        <a href="/dashboard/admin/add">
                             <div class="card-header card-header-icon" data-background-color="purple">
-                                <i class="material-icons large">shopping_cart</i>
+                                <i class="material-icons large">add</i>
                             </div>
+                        </a>
                         <div class="card-content">
-                            <h4 class="card-title">FTTH Reseller</h4>
+                            <h4 class="card-title">Dashboard Admins</h4>
                             <div class="toolbar">
                                 <!--        Here you can write extra buttons/actions for the toolbar              -->
                             </div>
@@ -24,9 +31,9 @@
                                        cellspacing="0" width="100%" style="width:100%">
                                     <thead>
                                     <tr>
-                                        <th>UserName</th>
-                                        <th>Amount</th>
-                                        <th>Company Name</th>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>Type</th>
                                         <th>Created at</th>
                                         <th>Updated at</th>
                                         <th class="disabled-sorting text-right">Actions</th>
@@ -34,26 +41,26 @@
                                     </thead>
                                     <tfoot>
                                     <tr>
-                                        <th>UserName</th>
-                                        <th>Amount</th>
-                                        <th>Company Name</th>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>Type</th>
                                         <th>Created at</th>
                                         <th>Updated at</th>
                                         <th class="text-right">Actions</th>
                                     </tr>
                                     </tfoot>
                                     <tbody>
-                                    @foreach($orders as $order)
+                                    @foreach($admins as $admin)
                                         <tr>
-                                            <td>{{$order->customer->name}}</td>
-                                            <td>{{$order->amount}}</td>
-                                            <td>{{$order->company->name}}</td>
-                                            <td>{{$order->created_at}}</td>
-                                            <td>{{$order->updated_at}}</td>
+                                            <td>{{$admin->name}}</td>
+                                            <td>{{$admin->email}}</td>
+                                            <td>{{$admin->type}}</td>
+                                            <td>{{$admin->created_at}}</td>
+                                            <td>{{$admin->updated_at}}</td>
                                             <td class="text-right">
-                                                <a href="/dashboard/ftth/edit/{{$order->id}}" class="btn btn-simple btn-warning btn-icon "><i
+                                                <a href="/dashboard/admin/edit/{{$admin->id}}" class="btn btn-simple btn-warning btn-icon"><i
                                                             class="material-icons">dvr</i></a>
-                                                <a href="/dashboard/ftth/delete/{{$order->id}}" class="btn btn-simple btn-danger btn-icon "><i
+                                                <a href="/dashboard/admin/delete/{{$admin->id}}" class="btn btn-simple btn-danger btn-icon "><i
                                                             class="material-icons">close</i></a>
                                             </td>
                                         </tr>
@@ -115,4 +122,5 @@
             $('.card .material-datatables label').addClass('form-group');
         });
     </script>
+
 @endsection

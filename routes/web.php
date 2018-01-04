@@ -16,7 +16,6 @@ Route::post('login','HomeController@login');
 //-----------------------------------------------DASHBOARD
 Route::get('/auth','DashController@authView');
 Route::post('/auth','DashController@authAdmin');
-
 /*
  |--------------------------------------------------------------------------
  |     CUSTOMER     CUSTOMER     CUSTOMER     CUSTOMER     CUSTOMER
@@ -26,16 +25,21 @@ Route::group(['middleware'=>'customer'], function () {
 
     Route::get('ftth','HomeController@getFtthView');
 });
-
 /*
  |--------------------------------------------------------------------------
  |     ADMIN     ADMIN     ADMIN     ADMIN     ADMIN     ADMIN     ADMIN
  |--------------------------------------------------------------------------
  */
-
 Route::group(['middleware'=>'admin','prefix' => 'dashboard'], function () {
-
     Route::get('/','DashController@index');
+    Route::get('logout','DashController@logout');
+    ///---------------------------------------------ADMINS
+    Route::get('admins','DashController@admins');
+    Route::get('admin/add','DashController@adminAddView');
+    Route::post('admin/add','DashController@adminAdd');
+    Route::get('admin/delete/{id}','DashController@adminDelete');
+    Route::get('admin/edit/{id}','DashController@adminEditView');
+    Route::post('admin/edit/{id}','DashController@adminEdit');
     ///---------------------------------------------ORDERS
     Route::get('orders','DashController@orders');
     ///---------------------------------------------CARDS
