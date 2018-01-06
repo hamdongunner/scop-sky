@@ -1,6 +1,6 @@
 var app = new Vue({
     el: '#root',
-    data: {search: '', products: [], cart: [], complete: [],shoppingCount:0},
+    data: {search: '', products: [], cart: [], complete: [], shoppingCount: 0},
     methods: {
         getProducts: function () {
             $.ajax({
@@ -24,10 +24,9 @@ var app = new Vue({
                     keys = Object.keys(results);
                     length = Object.keys(results).length;
                     console.log('length is ', length);
-                    app.shoppingCount =0;
-                    for(i =0 ; i < length ; i++){
-                       app.shoppingCount = app.shoppingCount + app.cart[keys[i]].quantity;
-                        console.log('shoppingCount =',app.shoppingCount)
+                    app.shoppingCount = 0;
+                    for (i = 0; i < length; i++) {
+                        app.shoppingCount = app.shoppingCount + app.cart[keys[i]].quantity;
                     }
 
                 }

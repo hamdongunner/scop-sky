@@ -9,7 +9,15 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-4 col-sm-6 col-md-offset-4 col-sm-offset-3">
-                            <form method="POST" action="ftth">
+                            <form method="POST" action="login">
+                                {{ csrf_field() }}
+                                @if($errors->count() >0)
+                                    <div class="alert alert-danger">
+                                        @foreach($errors->all() as $error)
+                                            <li>{{$error}}</li>
+                                        @endforeach
+                                    </div>
+                                @endif
                                 <div class="card card-login card-hidden">
                                     <div class="card-header text-center" data-background-color="rose">
                                         <h4 class="card-title">Login</h4>
@@ -34,8 +42,8 @@
                                                 <i class="material-icons">email</i>
                                             </span>
                                             <div class="form-group label-floating">
-                                                <label class="control-label">Email address</label>
-                                                <input type="email" class="form-control">
+                                                <label class="control-label">User Name</label>
+                                                <input name="user_name" type="text" class="form-control">
                                             </div>
                                         </div>
                                         <div class="input-group">
@@ -44,7 +52,7 @@
                                             </span>
                                             <div class="form-group label-floating">
                                                 <label class="control-label">Password</label>
-                                                <input type="password" class="form-control">
+                                                <input name="password" type="password" class="form-control">
                                             </div>
                                         </div>
                                     </div>
