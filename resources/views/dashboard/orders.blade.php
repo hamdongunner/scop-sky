@@ -45,16 +45,16 @@
                                     <tbody>
                                     @foreach($orders as $order)
                                         <tr>
-                                            <td>{{$order->customer->name}}</td>
+                                            <td>{{$order->customer->user_name or 'Wireless Customer' }}</td>
                                             <td>{{$order->amount}}</td>
                                             <td>{{$order->company->name}}</td>
                                             <td>{{$order->created_at}}</td>
                                             <td>{{$order->updated_at}}</td>
                                             <td class="text-right">
-                                                <a href="/dashboard/ftth/edit/{{$order->id}}" class="btn btn-simple btn-warning btn-icon "><i
+                                                <a href="/dashboard/order/view/{{$order->id}}" class="btn btn-simple btn-warning btn-icon "><i
                                                             class="material-icons">dvr</i></a>
-                                                <a href="/dashboard/ftth/delete/{{$order->id}}" class="btn btn-simple btn-danger btn-icon "><i
-                                                            class="material-icons">close</i></a>
+                                                {{--<a href="/dashboard/ftth/delete/{{$order->id}}" class="btn btn-simple btn-danger btn-icon "><i--}}
+                                                            {{--class="material-icons">close</i></a>--}}
                                             </td>
                                         </tr>
                                     @endforeach

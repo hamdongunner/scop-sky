@@ -17,22 +17,28 @@
                             </div>
                             <div class="card-content">
                                 <p class="category">.</p>
-                                <h3 class="card-title">The Wireless cards</h3>
+                                <h3 style="text-align: left;" class="card-title">The Wireless cards</h3>
+                                <div class="form-group label-floating is-empty">
+                                    <label class="control-label"></label>
+                                    <div class="col-lg-4 col-md-6 col-sm-3">
+                                        <div class="dropdown">
+                                            <button href="#pablo" class="dropdown-toggle btn btn-primary btn-round btn-block" data-toggle="dropdown">Choose Company
+                                                <b class="caret"></b>
+                                            </button>
+                                            <ul  class="dropdown-menu dropdown-menu-right">
+                                                <li v-for="(company,index) in companies">
+                                                    <button style="background-color: #ffffff;color: #000000;box-shadow: none" class="btn btn-block" @click="addCompany(company.id)">@{{ company.name }}</button>
+                                                </li>
+
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                {{--<h3>Manage Listings</h3>--}}
-                {{--@if(session()->has('cart'))--}}
-                    {{--<div class="alert alert-solid alert-danger" role="alert">--}}
-                        {{--<button type="button" class="close" data-dismiss="alert" aria-label="Close">--}}
-                            {{--<span aria-hidden="true">&times;</span>--}}
-                        {{--</button>--}}
-                        {{--<h5 style="color: white" class="text-center">{{ session()->get('cart') }}</h5>--}}
-                    {{--</div>--}}
-                {{--@endif--}}
-
-                <br>
+                <br><br>
                 <div class="row">
                     {{--@foreach($cards as $card)--}}
                     <div v-for="(product,index) in products" v-if="products" class="col-md-4">
@@ -44,20 +50,10 @@
                             </div>
                             <div class="card-content">
                                 <div class="card-actions">
-                                    <button type="button" class="btn btn-danger btn-simple fix-broken-card">
-                                        <i class="material-icons">build</i> Fix Header!
-                                    </button>
-                                    <button type="button" class="btn btn-default btn-simple" rel="tooltip"
-                                            data-placement="bottom" title="View">
-                                        <i class="material-icons">art_track</i>
-                                    </button>
-                                    <button @click="addToCart(product.id)" type="button" class="btn btn-success btn-simple" rel="tooltip"
+                                    <button @click="addToCart(product.id)" type="button"
+                                            class="btn btn-success btn-simple" rel="tooltip"
                                             data-placement="bottom" title="Edit">
                                         <i class="material-icons">add</i>
-                                    </button>
-                                    <button type="button" class="btn btn-danger btn-simple" rel="tooltip"
-                                            data-placement="bottom" title="Remove">
-                                        <i class="material-icons">close</i>
                                     </button>
                                 </div>
                                 <h4 class="card-title">
@@ -110,7 +106,7 @@
 
 
 @section('js')
-    <script src="vue/main.js"></script>
+    <script src="/vue/main.js"></script>
 @endsection
 
 

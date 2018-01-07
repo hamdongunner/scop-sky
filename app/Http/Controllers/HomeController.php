@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Card;
+use App\Company;
+use App\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -20,13 +22,44 @@ class HomeController extends Controller
     public function getWirelessView()
     {
         session()->flush();
+
         return View('app.wireless');
     }
 
     public function checkoutView()
     {
         $items = collect(Session::get('cart'));
-        return View('app.checkout',compact('items'));
+        $amount = 0;
+        foreach ($items as $item){
+           $amount = $amount + $item['value'] * $item['quantity'];
+        }
+        return View('app.checkout',compact('items','amount'));
+    }
+
+
+    public function checkout()
+    {
+        $cart = collect(Session::get('cart'));
+        $amount = 0;
+        $items = [];
+        $company =  Session::get('company');
+        foreach ($cart as $item){
+            $items[] = $item['id'];
+            $amount = $amount + $item['value'] * $item['quantity'];
+        }
+//        $items = serialize($items);
+        $order = new Order;
+        $order->items = $items;
+        $order->amount = $amount;
+        $order->user_id = 0 ;
+        if (!Auth::guard('app')->check())
+            $order->user_id = Auth::user()->id;
+        $order->company_id = $company->id;
+        $order->status = 'new';
+        $order->save();
+        session()->flush();
+        return ;
+
     }
 
     public function getFtthView()
@@ -59,7 +92,7 @@ class HomeController extends Controller
 
     public function getCards()
     {
-        return Card::all();
+        return Card::where('type','=','Wireless')->get();
     }
 
 
@@ -67,7 +100,7 @@ class HomeController extends Controller
     {
         $card = Card::find($id);
         if(!$card)
-            return redirect()->back();
+            return 0;
 
         $bool = true;
         $array = Session::get('cart');
@@ -79,7 +112,7 @@ class HomeController extends Controller
         } catch (\Exception $e){}
 
         if($bool)
-            $array[$id] = ['id'=>$id,'quantity'=>1,'name'=>$card->name,'type'=>$card->type,'value'=>$card->value];
+            $array[$id] = ['id'=>$id,'quantity'=>1,'name'=>$card->name,'type'=>$card->type,'value'=>$card->value,'image'=>$card->image];
 
         session()->put('cart', $array);
 //       session(['cart' => $array]);
@@ -87,5 +120,18 @@ class HomeController extends Controller
 
     }
 
+    public function companyAdd($id)
+    {
+        $company = Company::find($id);
+        if(!$company)
+            return 0;
+        session()->put('company', $company);
+        return $company;
+    }
+
+    public function getCompanies()
+    {
+        return Company::all();
+    }
 
 }

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Order extends Model
 {
     protected $casts = [
-        'shifts' => 'array'
+        'items' => 'array'
     ];
 
     public function company()

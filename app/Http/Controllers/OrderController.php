@@ -7,17 +7,11 @@ use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
-    public function order()
+
+    public function orderView($id)
     {
-        $order = new Order;
-        $order->shifts = [1,2,3];
-        $order->save();
-        return $order;
+        $order = Order::find($id);
+        return View('dashboard.orderView');
     }
 
-    public function get()
-    {
-        $order = Order::first();
-        return $order->items;
-    }
 }

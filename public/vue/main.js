@@ -1,6 +1,6 @@
 var app = new Vue({
     el: '#root',
-    data: {search: '', products: [], cart: [], complete: [], shoppingCount: 0},
+    data: {search: '', products: [], cart: [], complete: [], shoppingCount: 0, companies: []},
     methods: {
         getProducts: function () {
             $.ajax({
@@ -10,6 +10,17 @@ var app = new Vue({
                 success: function (results) {
                     console.log(results);
                     app.products = results;
+                }
+            });
+        },
+        getCompanies: function () {
+            $.ajax({
+                url: '/get-companies',
+                type: 'GET',
+                dataType: 'json',
+                success: function (results) {
+                    console.log(results);
+                    app.companies = results;
                 }
             });
         },
@@ -29,6 +40,17 @@ var app = new Vue({
                         app.shoppingCount = app.shoppingCount + app.cart[keys[i]].quantity;
                     }
 
+                }
+            });
+
+        },
+        addCompany: function (index) {
+            $.ajax({
+                url: '/company-add/' + index,
+                type: 'GET',
+                dataType: 'json',
+                success: function (results) {
+                    console.log(results);
                 }
             });
 
@@ -65,9 +87,12 @@ var app = new Vue({
     },
     mounted: function () {
         this.getProducts();
+        this.getCompanies();
         // this.getCart();
     }
 });
+
+
 
 
 

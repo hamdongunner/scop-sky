@@ -5,43 +5,68 @@
 
 
     <div id="root" class="main-panel">
-        <div class="content">
+        <br><br>
             <div class="container-fluid">
-
-                <div style="margin-top: -40px;margin-bottom: 40px;" class="row">
-                    <div style="margin-bottom: -55px;" class="col-lg-3 col-md-6 col-sm-6">
-                        <div class="card card-stats">
-                            <div class="card-header" data-background-color="blue">
-                                <a href="/checkout"><i class="material-icons">shopping_cart</i></a> @{{ shoppingCount }}
-
-                            </div>
-                            <div class="card-content">
-                                <p class="category">.</p>
-                                <h3 class="card-title">The Wireless cards</h3>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                {{--<h3>Manage Listings</h3>--}}
-                {{--@if(session()->has('cart'))--}}
-                {{--<div class="alert alert-solid alert-danger" role="alert">--}}
-                {{--<button type="button" class="close" data-dismiss="alert" aria-label="Close">--}}
-                {{--<span aria-hidden="true">&times;</span>--}}
-                {{--</button>--}}
-                {{--<h5 style="color: white" class="text-center">{{ session()->get('cart') }}</h5>--}}
-                {{--</div>--}}
-                {{--@endif--}}
-
                 <br>
                 <div class="row">
 
-                    @foreach($items as $item)
-                        {{ $item['name'] }}
-                    @endforeach
+                    <div class="col-md-11">
+                        <div class="timeline-heading">
+                            <button onclick="window.history.back();" style="font-size: large;text-transform: none;" class="label label-info">Back</button>
+                        </div>
+                        <div class="card card-testimonial">
+                            <div class="card-content">
+                                <h5 class="card-description">
+                                    Text </h5>
+                            </div>
+
+
+                            <div class="footer">
+                                <table class="table">
+                                    <tbody>
+                                    @foreach($items as $item)
+                                    <tr>
+                                        <td>
+                                            <div class="flag">
+                                                <img src="/images/{{$item['image']}}">
+                                            </div>
+                                        </td>
+                                        <td>{{$item['name']}}</td>
+                                        <td class="text-right">
+                                           $ {{$item['value']}}
+                                        </td>
+                                        <td class="text-right">
+                                            X {{ $item['quantity'] }}
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                    </tbody>
+                                </table>
+                                <br><br>
+                                <tr>
+                                    <td></td>
+                                    <td class="text-right">
+                                      <h4 class="text-danger"> Total : $ {{$amount}}</h4>
+                                    </td>
+                                </tr>
+                                <br>
+                                <div style="background: #ea4c89" class="card-avatar">
+                                    <form method="post" action="checkout">
+                                        {{csrf_field()}}
+                                    <button type="submit">
+                                        <img class="img" src="/assets/img/faces/card-profile1-square.png"/>
+                                    </button>
+                                    </form>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
                 </div>
             </div>
-        </div>
+        <br><br>
+        <br>
         <footer class="footer">
             <div class="container">
                 <nav class="pull-left">
@@ -69,9 +94,5 @@
 
 @endsection
 
-
-{{--@section('js')--}}
-{{--<script src="vue/main.js"></script>--}}
-{{--@endsection--}}
 
 
