@@ -2,16 +2,125 @@
 
 namespace App\Http\Controllers;
 
+use App\Card;
+use App\Company;
 use App\Order;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Auth;
+
+
+use Illuminate\Support\Facades\Input;
 use Illuminate\Http\Request;
+use GuzzleHttp\Client;
+use Excel;
+use Carbon\Carbon;
 
 class OrderController extends Controller
 {
 
+    public function checkout()
+    {
+        $cart = collect(Session::get('cart'));
+        $amount = 0;
+        $items = [];
+        $quantities = [];
+        $company = Session::get('company');
+        foreach ($cart as $item) {
+            $items[] = $item['id'];
+            $quantities[] = $item['quantity'];
+            $amount = $amount + $item['value'] * $item['quantity'];
+        }
+//        $items = serialize($items);
+        $order = new Order;
+        $order->items = $items;
+        $order->quantities = $quantities;
+        $order->amount = $amount;
+        $order->user_id = 0;
+        if (!Auth::guard('app')->check())
+            $order->user_id = Auth::user()->id;
+        $order->company_id = $company->id;
+        $order->status = 'new';
+        $order->save();
+        session()->flush();
+        return;
+    }
+
+
     public function orderView($id)
     {
         $order = Order::find($id);
-        return View('dashboard.orderView');
+        $quantity = $order->quantities;
+        $cards = Card::find($order->items);
+
+        return View('dashboard.orderView', compact('order', 'cards', 'quantity'));
+    }
+
+
+    public function orderProcessing($id)
+    {
+        $order = Order::find($id);
+        $order->status = 'Processing';
+        $order->update();
+
+        return redirect('/dashboard/order/view/' . $id);
+    }
+
+    public function orderProcessed($id)
+    {
+        $order = Order::find($id);
+        $order->status = 'Processed';
+        $order->update();
+
+        return redirect('/dashboard/order/view/' . $id);
+    }
+
+    public function ordersCsvView()
+    {
+        $orders = Order::all();
+        foreach ($orders as $transaction){
+            $arr = '| ';
+            foreach ($transaction['items'] as $key=>$item){
+                $arr = $arr .  Card::find($item)['name'] .' x '.$transaction['quantities'][$key].' | ';
+                $transaction['cards'] = $arr;
+            }
+            $transaction['items'] = serialize($transaction['items']);
+            $transaction['quantities'] = serialize($transaction['quantities']);
+        }
+        return View('dashboard.orderCsv', compact('orders'));
+    }
+
+
+    public function ordersCsv(Request $request)
+    {
+        $now = Carbon::now();
+        $now = Carbon::parse($now);
+        $to = Carbon::parse($request->to);
+        $from = Carbon::parse($request->from);
+        $name = $now . 'transactionExcel';
+        $transactions = Order::all();
+        if (Input::get('submit') == 'Export According Time') {
+            $transactions = Order::where('created_at', '>=', $from)->where('created_at', '<=', $to)->where('status', '!=', 'غير مكتمل')->get();
+            if ($transactions->count() == 0)
+                return redirect('/dashboard/orders/csv')->with('message', 'لا يوجد حوالات بين الفترات المختارة');
+        }
+
+        foreach ($transactions as $transaction){
+            $arr = '| ';
+            foreach ($transaction['items'] as $key=>$item){
+                $arr = $arr .  Card::find($item)['name'] .' x '.$transaction['quantities'][$key].' | ';
+                $transaction['cards'] = $arr;
+            }
+            $transaction['items'] = serialize($transaction['items']);
+            $transaction['quantities'] = serialize($transaction['quantities']);
+        }
+
+        return Excel::create($name, function ($excel) use ($transactions) {
+            $excel->sheet('mysheet', function ($sheet) use ($transactions) {
+                $sheet->fromArray($transactions);
+            });
+        })->download('xls');
+        return redirect('/dashboard');
+
     }
 
 }

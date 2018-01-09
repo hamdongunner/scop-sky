@@ -27,6 +27,15 @@ class DashController extends Controller
     public function orders()
     {
         $orders = Order::all();
+        foreach ($orders as $transaction){
+            $arr = '| ';
+            foreach ($transaction['items'] as $key=>$item){
+                $arr = $arr .  Card::find($item)['name'] .' x '.$transaction['quantities'][$key].' | ';
+                $transaction['cards'] = $arr;
+            }
+            $transaction['items'] = serialize($transaction['items']);
+            $transaction['quantities'] = serialize($transaction['quantities']);
+        }
         return View('dashboard.orders', compact('orders'));
     }
 

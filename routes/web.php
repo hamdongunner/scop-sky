@@ -7,15 +7,15 @@
 
  *///--------------------------------------------- APP
 Route::get('/', 'HomeController@index');
-Route::get('wireless', 'HomeController@getWirelessView');
-Route::get('checkout', 'HomeController@checkoutView');
-Route::post('checkout', 'HomeController@checkout');
 Route::get('login', 'HomeController@loginView');
 Route::post('login', 'HomeController@login');
+Route::get('wireless', 'HomeController@getWirelessView');
+Route::get('checkout', 'HomeController@checkoutView');
+Route::post('checkout', 'OrderController@checkout');
 ///--------------------------------------------- VUE
 Route::get('get-cards', 'HomeController@getCards');
 Route::get('get-companies', 'HomeController@getCompanies');
-Route::get('cart/add/{id}', 'HomeController@cardAdd');
+Route::get('cart-add/{id}', 'HomeController@cardAdd');
 Route::get('company-add/{id}', 'HomeController@companyAdd');
 ///----------------------------------------------- DASHBOARD
 Route::get('/auth', 'DashController@authView');
@@ -40,6 +40,8 @@ Route::group(['middleware' => 'admin', 'prefix' => 'dashboard'], function () {
     ///--------------------------------------------- ORDERS
     Route::get('orders', 'DashController@orders');
     Route::get('order/view/{id}', 'OrderController@orderView');
+    Route::get('order/status/processing/{id}', 'OrderController@orderProcessing');
+    Route::get('order/status/processed/{id}', 'OrderController@orderProcessed');
 
 });
 /*
@@ -48,6 +50,9 @@ Route::group(['middleware' => 'admin', 'prefix' => 'dashboard'], function () {
  |--------------------------------------------------------------------------
  */
 Route::group(['middleware' => 'superadmin', 'prefix' => 'dashboard'], function () {
+    ///--------------------------------------------- ORDERS
+    Route::get('orders/csv', 'OrderController@ordersCsvView');
+    Route::post('export', 'OrderController@ordersCsv');
     ///--------------------------------------------- ADMINS
     Route::get('admins', 'DashController@admins');
     Route::get('admin/add', 'DashController@adminAddView');

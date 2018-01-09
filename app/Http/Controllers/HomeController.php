@@ -37,31 +37,6 @@ class HomeController extends Controller
     }
 
 
-    public function checkout()
-    {
-        $cart = collect(Session::get('cart'));
-        $amount = 0;
-        $items = [];
-        $company =  Session::get('company');
-        foreach ($cart as $item){
-            $items[] = $item['id'];
-            $amount = $amount + $item['value'] * $item['quantity'];
-        }
-//        $items = serialize($items);
-        $order = new Order;
-        $order->items = $items;
-        $order->amount = $amount;
-        $order->user_id = 0 ;
-        if (!Auth::guard('app')->check())
-            $order->user_id = Auth::user()->id;
-        $order->company_id = $company->id;
-        $order->status = 'new';
-        $order->save();
-        session()->flush();
-        return ;
-
-    }
-
     public function getFtthView()
     {
         return View('app.ftth');

@@ -26,7 +26,7 @@ var app = new Vue({
         },
         addToCart: function (index) {
             $.ajax({
-                url: '/cart/add/' + index,
+                url: '/cart-add/' + index,
                 type: 'GET',
                 dataType: 'json',
                 success: function (results) {

@@ -6,16 +6,17 @@
 @endsection
 
 @section('content')
+
     <div class="content">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-12">
                     <div class="card">
-                            <div class="card-header card-header-icon" data-background-color="purple">
-                                <i class="material-icons large">shopping_cart</i>
-                            </div>
+                        <a href="/dashboard/orders/csv"><div class="card-header card-header-icon" data-background-color="purple">
+                                <p class="material-icons large">EXPORT CSV</p>
+                            </div></a>
                         <div class="card-content">
-                            <h4 class="card-title">FTTH Reseller</h4>
+                            <h4 class="card-title">Order</h4>
                             <div class="toolbar">
                                 <!--        Here you can write extra buttons/actions for the toolbar              -->
                             </div>
@@ -27,6 +28,7 @@
                                         <th>UserName</th>
                                         <th>Amount</th>
                                         <th>Company Name</th>
+                                        <th>Cards</th>
                                         <th>Created at</th>
                                         <th>Updated at</th>
                                         <th class="disabled-sorting text-right">Actions</th>
@@ -37,6 +39,7 @@
                                         <th>UserName</th>
                                         <th>Amount</th>
                                         <th>Company Name</th>
+                                        <th>Cards</th>
                                         <th>Created at</th>
                                         <th>Updated at</th>
                                         <th class="text-right">Actions</th>
@@ -48,6 +51,7 @@
                                             <td>{{$order->customer->user_name or 'Wireless Customer' }}</td>
                                             <td>{{$order->amount}}</td>
                                             <td>{{$order->company->name}}</td>
+                                            <td>{{$order['cards']}}</td>
                                             <td>{{$order->created_at}}</td>
                                             <td>{{$order->updated_at}}</td>
                                             <td class="text-right">
