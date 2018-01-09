@@ -15,7 +15,14 @@ class DashController extends Controller
 {
     public function index()
     {
-        return View('dashboard.index');
+        $orders = Order::where('status','!=','uncompleted')->get();
+        $processingOrder = Order::where('status','=','Processing')->get();
+        $processedOrder = Order::where('status','=','Processed')->get();
+        $new = Order::where('status','=','new')->get();
+        $all = count($orders);
+        $processed = count($processedOrder);
+        $processing = count($processingOrder);
+        return View('dashboard.index',compact('new','all','processed','processing','processingOrder'));
     }
 
     public function cards()

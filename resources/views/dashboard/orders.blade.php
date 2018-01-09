@@ -16,7 +16,7 @@
                                 <p class="material-icons large">EXPORT CSV</p>
                             </div></a>
                         <div class="card-content">
-                            <h4 class="card-title">Order</h4>
+                            <h4 class="card-title">Orders</h4>
                             <div class="toolbar">
                                 <!--        Here you can write extra buttons/actions for the toolbar              -->
                             </div>
