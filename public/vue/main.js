@@ -24,6 +24,17 @@ var app = new Vue({
                 }
             });
         },
+        getCart: function () {
+            $.ajax({
+                url: '/get-cart',
+                type: 'GET',
+                dataType: 'json',
+                success: function (results) {
+                    console.log(results);
+                    app.shoppingCount = results;
+                }
+            });
+        },
         addToCart: function (index) {
             $.ajax({
                 url: '/cart-add/' + index,
@@ -67,17 +78,6 @@ var app = new Vue({
             });
 
         },
-        getCart: function () {
-            $.ajax({
-                url: '/cart',
-                type: 'GET',
-                dataType: 'json',
-                success: function (results) {
-                    console.log(results);
-                    app.cart = results;
-                }
-            });
-        },
         autoComplete: function () {
             this.complete = [];
             $("#search").autocomplete({
@@ -88,6 +88,7 @@ var app = new Vue({
     mounted: function () {
         this.getProducts();
         this.getCompanies();
+        this.getCart();
         // this.getCart();
     }
 });

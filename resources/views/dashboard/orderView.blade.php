@@ -5,7 +5,6 @@
     active
 @endsection
 
-
 @section('content')
     <div class="content">
         <div class="container-fluid">
@@ -113,19 +112,21 @@
                                 </div>
                             </div>
                             <br>
+                            @if($order->status != 'Processed')
+                                <div class="col-md-3 col-md-offset-1 col-sm-2">
+                                    <a href="/dashboard/order/status/processing/{{$order->id}}"
+                                       class="btn btn-fill btn-primary">Processing
+                                        <div class="ripple-container"></div>
+                                    </a>
+                                </div>
 
-                            <div class="col-md-3 col-md-offset-1 col-sm-2">
-                                <a href="/dashboard/order/status/processing/{{$order->id}}" class="btn btn-fill btn-primary">Processing
-                                    <div class="ripple-container"></div>
-                                </a>
-                            </div>
-
-                            <div class="col-md-3 col-md-offset-1 col-sm-2">
-                                <a href="/dashboard/order/status/processed/{{$order->id}}" class="btn btn-fill btn-danger">Processed
-                                    <div class="ripple-container"></div>
-                                </a>
-                            </div>
-
+                                <div class="col-md-3 col-md-offset-1 col-sm-2">
+                                    <a href="/dashboard/order/status/processed/{{$order->id}}"
+                                       class="btn btn-fill btn-danger">Processed
+                                        <div class="ripple-container"></div>
+                                    </a>
+                                </div>
+                            @endif
                         </div>
                     </div>
                 </div>

@@ -14,6 +14,7 @@ Route::get('checkout', 'HomeController@checkoutView');
 Route::post('checkout', 'OrderController@checkout');
 ///--------------------------------------------- VUE
 Route::get('get-cards', 'HomeController@getCards');
+Route::get('get-cart', 'HomeController@getCartCount');
 Route::get('get-companies', 'HomeController@getCompanies');
 Route::get('cart-add/{id}', 'HomeController@cardAdd');
 Route::get('company-add/{id}', 'HomeController@companyAdd');

@@ -21,13 +21,15 @@ class HomeController extends Controller
 
     public function getWirelessView()
     {
-        session()->flush();
-
+//        session()->flush();
         return View('app.wireless');
     }
 
     public function checkoutView()
     {
+        $company = Session::get('company');
+        if(!$company)
+            return redirect()->back()->with('message','You Have to choose a Company');
         $items = collect(Session::get('cart'));
         $amount = 0;
         foreach ($items as $item){
@@ -107,6 +109,16 @@ class HomeController extends Controller
     public function getCompanies()
     {
         return Company::all();
+    }
+
+    public function getCartCount()
+    {
+        $count = 0;
+        $carts = Session::get('cart');
+        foreach ($carts as $cart){
+            $count = $count + $cart['quantity'];
+        }
+        return $count;
     }
 
 }

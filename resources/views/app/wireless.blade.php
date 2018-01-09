@@ -6,13 +6,23 @@
 
     <div id="root" class="main-panel">
         <div class="content">
+            @if(session()->has('message'))
+                <div style="margin-top: -60px;" class="alert alert-danger">
+                    {{ session()->get('message') }}
+                </div>
+                <br><br>
+            @endif
             <div class="container-fluid">
-
                 <div style="margin-top: -40px;margin-bottom: 40px;" class="row">
                     <div style="margin-bottom: -55px;" class="col-lg-3 col-md-6 col-sm-6">
                         <div class="card card-stats">
                             <div class="card-header" data-background-color="blue">
-                                <a href="/checkout"><i class="material-icons">shopping_cart</i></a> @{{ shoppingCount }}
+                                <a href="/checkout"><i class="material-icons">shopping_cart</i></a>
+                                <button v-if="shoppingCount != 0" style="height: 20px;min-width: 20px;width: 20px;margin-top: -25px;margin-left: -20px;" class="btn btn-danger btn-round btn-fab btn-fab-mini">
+                                    <p style="font-size: 15px;">@{{ shoppingCount }}</p>
+                                    <div class="ripple-container"></div></button>
+
+
 
                             </div>
                             <div class="card-content">
@@ -22,12 +32,17 @@
                                     <label class="control-label"></label>
                                     <div class="col-lg-4 col-md-6 col-sm-3">
                                         <div class="dropdown">
-                                            <button href="#pablo" class="dropdown-toggle btn btn-primary btn-round btn-block" data-toggle="dropdown">Choose Company
+                                            <button href="#pablo"
+                                                    class="dropdown-toggle btn btn-primary btn-round btn-block"
+                                                    data-toggle="dropdown">Choose Company
                                                 <b class="caret"></b>
                                             </button>
-                                            <ul  class="dropdown-menu dropdown-menu-right">
+                                            <ul class="dropdown-menu dropdown-menu-right">
                                                 <li v-for="(company,index) in companies">
-                                                    <button style="background-color: #ffffff;color: #000000;box-shadow: none" class="btn btn-block" @click="addCompany(company.id)">@{{ company.name }}</button>
+                                                    <button style="background-color: #ffffff;color: #000000;box-shadow: none"
+                                                            class="btn btn-block" @click="addCompany(company.id)">@{{
+                                                        company.name }}
+                                                    </button>
                                                 </li>
 
                                             </ul>
