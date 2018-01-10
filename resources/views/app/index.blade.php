@@ -1,4 +1,4 @@
-@extends('layout.master')
+@extends('layout.appMaster')
 
 
 @section('content')
@@ -8,72 +8,56 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-6 col-md-offset-3 text-center">
-                            <h2 class="title">اختر نوع الشبكة الخاصة بك</h2>
-                            <h5 class="description">هناك نوعيتين للشبكات</h5>
+                            <br><br>
+                            <h2 class="title" style="font-size: 26px">اختر نوع الشبكة الخاصة بك</h2>
+                            <h3 class="description">هناك نوعيتين للشبكات</h3>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-6">
                             <div class="card card-pricing card-plain">
                                 <div class="card-content">
-                                    <h2 style="color: white">Wireless Reseller</h2>
-                                    <div class="icon">
-                                        <i class="material-icons">network_wifi</i>
+                                    <br><br>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <h2 style="text-align: center">Wireless Reseller</h2>
+                                            <div class="logo pull-left">
+                                                <img src="app/images/home/ic_network_wifi_black_36dp_2x.png" alt=""/>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-12">
+                                            <p class="card-description" style="text-align: center">
+                                                <a style="border-radius: 20px;background: linear-gradient(-10deg, #314755, #26a0da);color: #fff"
+                                                   href="/wireless" class="btn btn-default add-to-cart">Choose</a>
+                                            </p>
+                                        </div>
                                     </div>
-                                    <h3 class="card-title"></h3>
-                                    <p class="card-description">
-                                        Some description on this network
-                                    </p>
-                                    <a href="/wireless" class="btn btn-rose btn-round">Choose</a>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="card card-pricing card-plain">
                                 <div class="card-content">
-                                    <h2 style="color: white">FTTH Reseller</h2>
-                                    <div class="icon icon-rose">
-                                        <i class="material-icons">settings_input_hdmi</i>
+                                    <br><br><br>
+
+                                    <h2 style="text-align: center">FTTH Reseller</h2>
+                                    <div class="logo pull-left">
+                                        <img src="app/images/home/ic_settings_input_hdmi_black_36dp_2x.png" alt=""/>
                                     </div>
                                     <h3 class="card-title"></h3>
-                                    <p class="card-description">
-                                        Some description on this Network
+
+                                    <p class="card-description" style="text-align: center">
+                                        <a style="border-radius: 20px;background: linear-gradient(-10deg, #314755, #26a0da);color: #fff"
+                                           href="/ftth" class="btn btn-rose btn-round">Choose</a>
                                     </p>
-                                    <a href="/ftth" class="btn btn-rose btn-round">Choose</a>
                                 </div>
                             </div>
                         </div>
-
-
                     </div>
                 </div>
             </div>
-            <footer class="footer">
-                <div class="container">
-                    <nav class="pull-left">
-                        <ul>
-                            <li>
-                                <a href="#">
-                                    Zaincash
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                    ScopeSky
-                                </a>
-                            </li>
 
-                        </ul>
-                    </nav>
-                    <p class="copyright pull-left">
-                        &copy;
-                        <script>
-                            document.write(new Date().getFullYear())
-                        </script>
-                        <a href="https://www.zaincash.iq/">Zaincash</a> iraqi wallet
-                    </p>
-                </div>
-            </footer>
         </div>
     </div>
 
