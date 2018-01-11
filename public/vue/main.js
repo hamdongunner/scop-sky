@@ -35,6 +35,9 @@ var app = new Vue({
                 }
             });
         },
+        hidde: function () {
+           console.log('here i am ');
+        },
         addToCart: function (index) {
             $.ajax({
                 url: '/cart-add/' + index,
