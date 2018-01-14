@@ -7,8 +7,6 @@ use App\Company;
 use App\Order;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
-
-
 use Illuminate\Support\Facades\Input;
 use Illuminate\Http\Request;
 use GuzzleHttp\Client;

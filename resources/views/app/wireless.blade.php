@@ -4,58 +4,56 @@
 @section('content')
 
 
-    <div id="root" class="main-panel">
+    <div id="root">
+
         <div class="content">
-            @if(session()->has('message'))
-                <div style="margin-top: -60px;" class="alert alert-danger">
-                    {{ session()->get('message') }}
-                </div>
-                <br><br>
-            @endif
             <div class="container-fluid">
-                <div style="margin-top: -40px;margin-bottom: 40px;" class="row">
-                    <div style="margin-bottom: -55px;" class="col-lg-3 col-md-6 col-sm-6">
-                        <div class="card card-stats">
-                            <div class="card-header" data-background-color="blue">
-                                <a href="/checkout"><i class="material-icons">shopping_cart</i></a>
-                                <button v-if="shoppingCount != 0" style="height: 20px;min-width: 20px;width: 20px;margin-top: -25px;margin-left: -20px;" class="btn btn-danger btn-round btn-fab btn-fab-mini">
-                                    <p style="font-size: 15px;">@{{ shoppingCount }}</p>
-                                    <div class="ripple-container"></div></button>
 
-
-
-                            </div>
-                            <div class="card-content">
-                                <p class="category">.</p>
-                                <h3 style="text-align: left;" class="card-title">The Wireless cards</h3>
-                                <div class="form-group label-floating is-empty">
-                                    <label class="control-label"></label>
-                                    <div class="col-lg-4 col-md-6 col-sm-3">
-                                        <div class="dropdown">
-                                            <button href="#pablo"
-                                                    class="dropdown-toggle btn btn-primary btn-round btn-block"
-                                                    data-toggle="dropdown">Choose Company
-                                                <b class="caret"></b>
-                                            </button>
-                                            <ul class="dropdown-menu dropdown-menu-right">
-                                                <li v-for="(company,index) in companies">
-                                                    <button style="background-color: #ffffff;color: #000000;box-shadow: none"
-                                                            class="btn btn-block" @click="addCompany(company.id)">@{{
-                                                        company.name }}
-                                                    </button>
-                                                </li>
-
-                                            </ul>
-                                        </div>
-                                    </div>
+                <div style="margin-top: 0px;margin-bottom: 0px;" class=" navbar-fixed-top">
+                    <div style="margin-bottom: 0px;padding-right: 0px;padding-left: 0px;"
+                         class="col-lg-12 col-md-12 col-sm-12">
+                        <div style="background: linear-gradient(to right, #232526 , #303030);">
+                            <div style="" class="row">
+                                <div class="col-xs-2 col-md-2">
+                                    <br><a href="/">
+                                        <i style="font-size: 34px;color: #fff;padding-bottom: 10px;"
+                                           class="material-icons">chevron_left</i>
+                                    </a>
+                                </div>
+                                <div class="col-xs-8 col-md-9 text-center">
+                                    <img align="middle" style="width: 100px;margin-bottom: 0px;margin-top: 0px;"
+                                         src="/assets/img/scope2.png" alt=""/>
+                                </div>
+                                <div class="col-xs-2 col-md-1">
+                                    <br>
+                                    <a href="/checkout">
+                                        <i style="font-size: 34px;color: #fff;padding-bottom: 10px;"
+                                           class="material-icons">shopping_cart</i>
+                                    </a>
+                                    <button v-if="shoppingCount != 0"
+                                            style="height: 20px;min-width: 20px;width: 20px;margin-top: -35px;margin-left: -20px;"
+                                            class="btn btn-danger btn-round btn-fab btn-fab-mini">
+                                        <p style="font-size: 15px;">@{{ shoppingCount }}</p>
+                                        <div class="ripple-container"></div>
+                                    </button>
+                                    <br>
                                 </div>
                             </div>
                         </div>
+
                     </div>
                 </div>
+                @if(session()->has('message'))
+                    <div style="margin-top: 0px;" class="alert alert-danger">
+                        {{ session()->get('message') }}
+                    </div>
+                    <br><br>
+                @endif
+
+                <br><br>
                 <br><br>
                 <div class="row">
-                    {{--@foreach($cards as $card)--}}
+                    <br><br>
                     <div v-for="(product,index) in products" v-if="products" class="col-md-4">
                         <div class="card card-product">
                             <div class="card-image" data-header-animation="true">
@@ -83,12 +81,10 @@
                                     <h4>@{{ product.value }} $</h4>
                                 </div>
                                 <div class="stats pull-right">
-                                    {{--<p class="category"><i class="material-icons">place</i> Barcelona, Spain</p>--}}
                                 </div>
                             </div>
                         </div>
                     </div>
-                    {{--@endforeach--}}
                 </div>
             </div>
         </div>
