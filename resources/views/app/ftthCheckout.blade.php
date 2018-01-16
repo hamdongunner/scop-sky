@@ -73,7 +73,7 @@
                                 </div>
                             </div>
                             <div style="background: #ea4c89" class="card-avatar">
-                                <form method="post" action="/checkout">
+                                <form method="post" action="/ftth/checkout">
                                     {{csrf_field()}}
                                     <button type="submit">
                                         <img class="img" src="/assets/img/faces/card-profile1-square.png"/>

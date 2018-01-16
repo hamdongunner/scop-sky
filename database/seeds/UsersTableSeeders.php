@@ -18,7 +18,7 @@ class UsersTableSeeders extends Seeder
                 'name' => 'scopeSky First Admin',
                 'email' => 'ScopeSkyAdmin@zaincash.iq',
                 'is_admin'=>1,
-                'password' => bcrypt('1'),
+                'password' => bcrypt('HaZC#$@'),
             ]);
         }else{
             return null;

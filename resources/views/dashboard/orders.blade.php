@@ -29,6 +29,8 @@
                                         <th>Amount</th>
                                         <th>Company Name</th>
                                         <th>Cards</th>
+                                        <th>Type</th>
+                                        <th>Status</th>
                                         <th>Created at</th>
                                         <th>Updated at</th>
                                         <th class="disabled-sorting text-right">Actions</th>
@@ -40,6 +42,8 @@
                                         <th>Amount</th>
                                         <th>Company Name</th>
                                         <th>Cards</th>
+                                        <th>Type</th>
+                                        <th>Status</th>
                                         <th>Created at</th>
                                         <th>Updated at</th>
                                         <th class="text-right">Actions</th>
@@ -52,6 +56,8 @@
                                             <td>{{$order->amount}}</td>
                                             <td>{{$order->company->name}}</td>
                                             <td>{{$order['cards']}}</td>
+                                            <td>{{$order->type}}</td>
+                                            <td>{{$order->status}}</td>
                                             <td>{{$order->created_at}}</td>
                                             <td>{{$order->updated_at}}</td>
                                             <td class="text-right">

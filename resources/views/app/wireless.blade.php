@@ -89,7 +89,6 @@
                                                 <img style="background: #ea4c89 !important;width: 100%" class="img"
                                                      src="/assets/img/faces/card-profile1-square.png"/>
                                             </button>
-
                                         </div>
                                     </div>
                                 </form>
@@ -101,7 +100,8 @@
                 {{--</div>--}}
             </div>
         </div>
-        <footer class="footer navbar-fixed-bottom">
+
+        <footer class="footer">
             <div class="container">
                 <nav class="pull-left">
                     <ul>

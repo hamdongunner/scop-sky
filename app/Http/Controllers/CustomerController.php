@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Company;
 use App\Customer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -10,8 +11,8 @@ class CustomerController extends Controller
 {
     public function ftthAddView()
     {
-        $customer = Customer::all();
-        return View('dashboard.ftthAdd');
+        $companies = Company::all();
+        return View('dashboard.ftthAdd',compact('companies'));
     }
 
     public function ftthAdd(Request $request)
@@ -25,6 +26,7 @@ class CustomerController extends Controller
             'phone'=>'required',
             'address'=>'required',
             'cabinet_number'=>'required',
+            'company'=>'required'
         ]);
 
         if ($validator->fails())
@@ -36,6 +38,7 @@ class CustomerController extends Controller
         $customer->first_name = $request->first_name;
         $customer->last_name = $request->last_name;
         $customer->phone = $request->phone;
+        $customer->company_id = $request->company;
         $customer->address = $request->address;
         $customer->cabinet_number = $request->cabinet_number;
         $customer->save();

@@ -33,7 +33,8 @@ class DashController extends Controller
 
     public function orders()
     {
-        $orders = Order::all();
+        $orders = Order::where('status','!=','uncompleted')->get();
+
         foreach ($orders as $transaction){
             $arr = '| ';
             foreach ($transaction['items'] as $key=>$item){

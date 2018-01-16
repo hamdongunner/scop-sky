@@ -47,6 +47,8 @@ class HomeController extends Controller
 
     public function loginView()
     {
+       if( Auth::guard('app'))
+           return redirect('ftth');
         return View('app.login');
     }
 
@@ -69,10 +71,7 @@ class HomeController extends Controller
 
     public function checkoutFtthView()
     {
-        $company = Session::get('company');
 
-        if (!$company)
-            return redirect()->back()->with('message', 'You Have to choose a Company');
         $items = collect(Session::get('cart'));
         $amount = 0;
         foreach ($items as $item) {
@@ -98,7 +97,7 @@ class HomeController extends Controller
 
     public function checkout()
     {
-
+//        return Auth::guard('app')->user()->company_id;
         $cart = collect(Session::get('cart'));
         $amount = 0;
         $items = [];
@@ -116,9 +115,10 @@ class HomeController extends Controller
         $order->amount = $amount;
         $order->type = 'FTTH';
         $order->user_id = 0;
-        if (!Auth::guard('app')->check())
-            $order->user_id = Auth::user()->id;
-        $order->company_id = $company->id;
+//        if (!Auth::guard('app')->check()){
+            $order->user_id = Auth::guard('app')->user()->id;
+            $order->company_id = Auth::guard('app')->user()->company_id;
+//        }
         $order->status = 'new';
         $order->save();
         session()->flush();
@@ -149,7 +149,7 @@ class HomeController extends Controller
         if (!Auth::guard('app')->check())
             $order->user_id = Auth::user()->id;
         $order->company_id = $request->company;
-        $order->status = 'new';
+        $order->status = 'uncompleted';
         $order->save();
         session()->flush();
         $this->charge(250, 'ScopeSky', 'Order_00001');
@@ -185,6 +185,7 @@ class HomeController extends Controller
             'msisdn' => $_ENV['ZC_MSISDN'],
             'orderId' => $order_id,
             'redirectUrl' => 'http://localhost:8000/redirect',
+            'integrationUrl' => 'http://localhost:8000/redirect',
             'iat' => $now->getTimestamp(),
             'exp' => $now->getTimestamp() + 60 * 60 * 4
         ];

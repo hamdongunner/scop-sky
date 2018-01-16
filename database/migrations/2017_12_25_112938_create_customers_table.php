@@ -21,6 +21,7 @@ class CreateCustomersTable extends Migration
             $table->string('address');
             $table->string('cabinet_number');
             $table->string('user_name')->unique();
+            $table->string('company_id');
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
