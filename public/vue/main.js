@@ -99,14 +99,29 @@ var app = new Vue({
         },
         deleteFromCart: function (index) {
             $.ajax({
-                url: '/cart/delete/' + index,
+                url: '/cart-delete/' + index,
                 type: 'GET',
                 dataType: 'json',
                 success: function (results) {
-                    console.log(results);
+                    console.log('checkout is',results);
+                    console.log('product',app.products);
                     app.cart = results;
+                    keys = Object.keys(results);
+                    length = Object.keys(results).length;
+                    console.log('length is ', length);
+                    app.shoppingCount = 0;
+                    for (i = 0; i < length; i++) {
+                        app.shoppingCount = app.shoppingCount + app.cart[keys[i]].quantity;
+                    }
+
+                    if(results[index] == null){
+                    app.products.forEach(function (t) {
+                        if (t.id == index)
+                            t.show = false;
+                    });}
                 }
             });
+
 
         },
         autoComplete: function () {
@@ -115,18 +130,7 @@ var app = new Vue({
                 source: '/products/auto'
             });
         },
-        addFifty:function () {
-            if(app.price == null || app.price == "")
-                app.price = 0;
-            app.price = parseInt(app.price) + 50 ;
-            this.sendTheValue();
-        },
-         deleteFifty:function () {
-            if(app.price > 0)
-            app.price = parseInt(app.price) - 50 ;
-             this.sendTheValue();
 
-         },
         sendTheValue:function () {
             Theprice = Math.ceil(app.price/50)*50;
             app.price = Theprice;

@@ -44,7 +44,7 @@
 
             </div>
 
-            <footer style="background: #000;" class="footer">
+            <footer style="background: #000;" class="footer navbar-fixed-bottom">
                 <div class="container" style="background: #000;">
                     <nav class="pull-left">
                         <ul>

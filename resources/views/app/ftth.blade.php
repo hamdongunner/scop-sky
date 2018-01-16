@@ -71,7 +71,7 @@
                                             data-placement="bottom" title="Edit">
                                         Add To Cart
                                     </button>
-                                    <button class="btn btn-danger" v-if="product.show">Delete</button>
+                                    <button @click="deleteFromCart(product.id)" class="btn btn-danger" v-if="product.show">Delete</button>
                                 </div>
                                 <div class="stats pull-right">
                                 </div>
@@ -81,7 +81,7 @@
                 </div>
             </div>
         </div>
-        <footer class="footer">
+        <footer class="footer navbar-fixed-bottom">
             <div class="container">
                 <nav class="pull-left">
                     <ul>

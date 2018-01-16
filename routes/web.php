@@ -11,13 +11,14 @@ Route::get('login', 'HomeController@loginView');
 Route::post('login', 'HomeController@login');
 Route::get('wireless', 'HomeController@getWirelessView');
 Route::get('wireless/checkout', 'HomeController@checkoutView');
-Route::post('checkout', 'HomeController@checkout');
+Route::post('wireless/checkout', 'HomeController@checkoutWireless');
 Route::get('redirect', 'HomeController@checkRedirect');
 ///--------------------------------------------- VUE
 Route::get('get-cards', 'HomeController@getCards');
 Route::get('get-cart', 'HomeController@getCartCount');
 Route::get('get-companies', 'HomeController@getCompanies');
 Route::get('cart-add/{id}', 'HomeController@cardAdd');
+Route::get('cart-delete/{id}', 'HomeController@cardDelete');
 Route::get('company-add/{id}', 'HomeController@companyAdd');
 Route::get('price-add/{price}', 'HomeController@priceAdd');
 ///----------------------------------------------- DASHBOARD
@@ -32,6 +33,7 @@ Route::group(['middleware' => 'customer'], function () {
 
     Route::get('ftth', 'HomeController@getFtthView');
     Route::get('ftth/checkout', 'HomeController@checkoutFtthView');
+    Route::post('ftth/checkout', 'HomeController@checkout');
 
 });
 /*

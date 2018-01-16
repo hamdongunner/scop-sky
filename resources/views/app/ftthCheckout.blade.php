@@ -29,6 +29,8 @@
                 </div>
             </div>
             <br>
+            <br>
+            <br>
             <div class="row">
 
                 <div class="col-md-11">
@@ -50,7 +52,7 @@
                                         </td>
                                         <td>{{$item['name']}}</td>
                                         <td class="text-right">
-                                            $ {{$item['value']}}
+                                            $ {{ $item['value']}}
                                         </td>
                                         <td class="text-right">
                                             X {{ $item['quantity'] }}
@@ -59,35 +61,18 @@
                                 @endforeach
                                 </tbody>
                             </table>
-                            <br><br>
+                            <br>
                             <div class="col-xs-8 col-xs-offset-2">
-                                <h4 class="text-danger"> Total : IQD {{$IQD}}</h4>
-                            </div>
-                            <div class="col-xs-8 col-xs-offset-2">
-                                <h4 class="text-danger"> Total : $ {{$amount}}</h4>
+                                <h4 class="text-danger"> Total : IQD {{$amount}}</h4>
                             </div>
 
                             <br>
                             <div class="card-content">
                                 <div class="card-description">
-                                    <div class="dropdown ">
-                                        <button href="#pablo"
-                                                class="dropdown-toggle btn btn-info btn-round btn-block"
-                                                data-toggle="dropdown">Choose Company
-                                            <b class="caret"></b>
-                                        </button>
-                                        <ul class="dropdown-menu dropdown-menu-right">
-                                            <li v-for="(company,index) in companies">
-                                                <button style="background-color: #ffffff;color: #000000;box-shadow: none"
-                                                        class="btn btn-block" @click="addCompany(company.id)">@{{
-                                                    company.name }}
-                                                </button>
-                                            </li>
-                                        </ul>
-                                    </div>
+
                                 </div>
                             </div>
-                            <div v-if="confirmButtonShow" style="background: #ea4c89" class="card-avatar">
+                            <div style="background: #ea4c89" class="card-avatar">
                                 <form method="post" action="/checkout">
                                     {{csrf_field()}}
                                     <button type="submit">
@@ -104,7 +89,7 @@
         </div>
         <br><br>
         <br>
-        <footer class="footer">
+        <footer class="footer navbar-fixed-bottom">
             <div class="container">
                 <nav class="pull-left">
                     <ul>

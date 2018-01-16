@@ -6,6 +6,7 @@ use App\Card;
 use App\Company;
 use App\Order;
 use App\Rate;
+use App\Wireless;
 use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -33,7 +34,9 @@ class HomeController extends Controller
     public function getWirelessView()
     {
 //        session()->flush();
-        return View('app.wireless');
+        $wireless = Wireless::all();
+        $companies = Company::all();
+        return View('app.wireless', compact('wireless', 'companies'));
     }
 
 
@@ -68,14 +71,14 @@ class HomeController extends Controller
     {
         $company = Session::get('company');
 
-        if(!$company)
-            return redirect()->back()->with('message','You Have to choose a Company');
+        if (!$company)
+            return redirect()->back()->with('message', 'You Have to choose a Company');
         $items = collect(Session::get('cart'));
         $amount = 0;
-        foreach ($items as $item){
+        foreach ($items as $item) {
             $amount = $amount + $item['value'] * $item['quantity'];
         }
-        return View('app.ftthCheckout',compact('items','amount','IQD'));
+        return View('app.ftthCheckout', compact('items', 'amount', 'IQD'));
     }
 
     public function checkoutView()
@@ -87,17 +90,15 @@ class HomeController extends Controller
 //        foreach ($items as $item) {
 //            $amount = $amount + $item['value'] * $item['quantity'];
 //        }
-        if($amount == 0 )
-            return redirect()->back()->with('message','السلة فارغ ');
+        if ($amount == 0)
+            return redirect()->back()->with('message', 'السلة فارغ ');
         return View('app.checkout', compact('price', 'amount'));
     }
 
 
     public function checkout()
     {
-        $company = Session::get('company');
-        if(!$company)
-            return redirect()->back()->with('message','You Have to choose a Company');
+
         $cart = collect(Session::get('cart'));
         $amount = 0;
         $items = [];
@@ -113,10 +114,41 @@ class HomeController extends Controller
         $order->items = $items;
         $order->quantities = $quantities;
         $order->amount = $amount;
+        $order->type = 'FTTH';
         $order->user_id = 0;
         if (!Auth::guard('app')->check())
             $order->user_id = Auth::user()->id;
         $order->company_id = $company->id;
+        $order->status = 'new';
+        $order->save();
+        session()->flush();
+        $this->charge(250, 'ScopeSky', 'Order_00001');
+        return;
+    }
+
+
+    public function checkoutWireless(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'company' => 'required',
+            'value' => 'required',
+        ]);
+
+        if ($validator->fails())
+            return back()->withErrors($validator->errors())->withInput();
+
+        $amount = 0;
+        $items = [];
+        $quantities = [];
+        $order = new Order;
+        $order->items = $items;
+        $order->quantities = $quantities;
+        $order->amount = $amount;
+        $order->type = 'WIRELESS';
+        $order->user_id = 0;
+        if (!Auth::guard('app')->check())
+            $order->user_id = Auth::user()->id;
+        $order->company_id = $request->company;
         $order->status = 'new';
         $order->save();
         session()->flush();
@@ -233,13 +265,12 @@ class HomeController extends Controller
 
     public function cardAdd($id)
     {
-        $card = Card::find($id);
-        if (!$card)
-            return 0;
+        $card = Card::findOrFail($id);
 
+//        session()->flush();
         $bool = true;
         $array = Session::get('cart');
-//        return $array;
+
         try {
             $array[$id]['quantity'] = $array[$id]['quantity'] + 1;
             if ($array[$id]['quantity'] > 1)
@@ -248,27 +279,38 @@ class HomeController extends Controller
         }
 
         if ($bool)
-            $array[$id] = ['id' => $id, 'quantity' => 1, 'name' => $card->name, 'type' => $card->type, 'value' => $card->value, 'image' => $card->image];
+            $array[$id] = ['id' => $id,
+                'quantity' => 1,
+                'name' => $card->name,
+                'type' => $card->type,
+                'value' => $card->value,
+                'image' => $card->image];
 
         session()->put('cart', $array);
-//       session(['cart' => $array]);
         return Session::get('cart');
 
     }
 
-    public function companyAdd($id)
+    public function cardDelete($id)
     {
-        $company = Company::find($id);
-        if (!$company)
-            return 'there i sno such company';
-        session()->put('company', $company);
-        return $company;
-    }
+        $card = Card::findOrFail($id);
+//        session()->flush();
+        $bool = false;
+        $array = Session::get('cart');
+        try {
+            $array[$id]['quantity'] = $array[$id]['quantity'] - 1;
+            if ($array[$id]['quantity'] < 1)
+                $bool = true;
+        } catch (\Exception $e) {
+        }
 
-    public function priceAdd($price)
-    {
-        session()->put('price', $price);
-        return Session::get('price');
+        if ($bool){
+            $array = collect($array);
+            $array->forget($id);
+            $array = $array->toArray();
+        }
+        session()->put('cart', $array);
+        return Session::get('cart');
     }
 
     public function getCompanies()
