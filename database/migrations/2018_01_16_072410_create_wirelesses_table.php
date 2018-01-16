@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCardsTable extends Migration
+class CreateWirelessesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,9 @@ class CreateCardsTable extends Migration
      */
     public function up()
     {
-        Schema::create('cards', function (Blueprint $table) {
+        Schema::create('wirelesses', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->longText('image');
-            $table->longText('description');
-            $table->integer('value');
+            $table->double('value');
             $table->timestamps();
         });
     }
@@ -30,6 +27,6 @@ class CreateCardsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('cards');
+        Schema::dropIfExists('wirelesses');
     }
 }

@@ -63,19 +63,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            <div class="row">
-                                <label class="col-sm-2 label-on-left">Type</label>
-                                <div class="col-sm-9">
-                                    <div class="form-group label-floating is-empty">
-                                        <label class="control-label"></label>
-                                        <select required name="type" class="selectpicker" data-style="btn btn-primary btn-round" title="Single Select" data-size="7" tabindex="-98"><option class="bs-title-option" value="">Single Select</option>
-                                            <option disabled="" selected="">Choose Type</option>
-                                            <option value="Wireless">Wireless</option>
-                                            <option value="FTTH">FTTH</option>
-                                        </select></div>
-                                    {{--<span class="help-block">Enter the type of the card ...</span>--}}
-                                </div>
-                            </div>
+
                                 <br>
                                 <div class="row">
                                     <div class="col-md-4 col-md-offset-2 col-sm-2">

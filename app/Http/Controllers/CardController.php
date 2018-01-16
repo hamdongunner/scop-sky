@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Card;
+use App\Rate;
+use App\Wireless;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
@@ -17,7 +19,6 @@ class CardController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required',
-            'type' => 'required',
             'value' => 'required',
             'avatar' => 'required',
             'description' => 'required',
@@ -35,7 +36,6 @@ class CardController extends Controller
 
         $card = new Card;
         $card->name = $request->name;
-        $card->type = $request->type;
         $card->value = $request->value;
         $card->description = $request->description;
         $card->image = $filename;
@@ -67,7 +67,7 @@ class CardController extends Controller
 
     public function cardEdit(Request $request, $id)
     {
-            $validator = Validator::make($request->all(), [
+        $validator = Validator::make($request->all(), [
             'name' => 'required',
             'value' => 'required',
             'description' => 'required',
@@ -87,14 +87,33 @@ class CardController extends Controller
         $card->name = $request->name;
         $card->value = $request->value;
         $card->description = $request->description;
-        if ($request->type == 'FTTH' || $request->type == 'Wireless'){
-            $card->type = $request->type;
-        }
-        if ($filename){
+        if ($filename) {
             $card->image = $filename;
         }
         $card->update();
 
         return redirect()->back()->with('message', 'The cart has been Edited');
     }
+
+    public function valueView()
+    {
+        $wireless = Wireless::all();
+        return View('dashboard.wireless',compact('wireless'));
+    }
+
+    public function value(Request $request)
+    {
+        $wireless = new Wireless;
+        $wireless->value = $request->value;
+        $wireless->save();
+        return redirect()->back()->with('message','Done');
+    }
+
+    public function WirelessDelete($id)
+    {
+        $wireless = Wireless::find($id);
+        $wireless->delete();
+        return redirect()->back();
+    }
+
 }

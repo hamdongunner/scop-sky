@@ -5,87 +5,99 @@
 
 
     <div id="root">
-
         <div class="content">
             <div class="container-fluid">
-
                 <div style="margin-top: 0px;margin-bottom: 0px;" class=" navbar-fixed-top">
                     <div style="margin-bottom: 0px;padding-right: 0px;padding-left: 0px;"
                          class="col-lg-12 col-md-12 col-sm-12">
                         <div style="background: linear-gradient(to right, #232526 , #303030);">
                             <div style="" class="row">
-                                <div class="col-xs-2 col-md-2">
-                                    <br><a href="/">
+                                <div class="col-xs-1 col-xs-offset-1 col-md-1">
+                                    <br>
+                                    <a href="/">
                                         <i style="font-size: 34px;color: #fff;padding-bottom: 10px;"
                                            class="material-icons">chevron_left</i>
                                     </a>
                                 </div>
-                                <div class="col-xs-8 col-md-9 text-center">
+                                <div class="col-xs-6 col-xs-push-1 col-md-6 text-center">
                                     <img align="middle" style="width: 100px;margin-bottom: 0px;margin-top: 0px;"
-                                         src="/assets/img/scope2.png" alt=""/>
+                                         src="/assets/img/scope2.png" alt="ScopSky"/>
                                 </div>
-                                <div class="col-xs-2 col-md-1">
+                                <div class="col-xs-2 col-xs-push-1 col-md-1 col-md-offset-1">
                                     <br>
-                                    <a href="/checkout">
+                                    <a href="/wireless/checkout">
                                         <i style="font-size: 34px;color: #fff;padding-bottom: 10px;"
                                            class="material-icons">shopping_cart</i>
                                     </a>
-                                    <button v-if="shoppingCount != 0"
-                                            style="height: 20px;min-width: 20px;width: 20px;margin-top: -35px;margin-left: -20px;"
-                                            class="btn btn-danger btn-round btn-fab btn-fab-mini">
-                                        <p style="font-size: 15px;">@{{ shoppingCount }}</p>
-                                        <div class="ripple-container"></div>
-                                    </button>
                                     <br>
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
+                <br><br>
+                <br>
+                {{--<div class="row">--}}
+
                 @if(session()->has('message'))
                     <div style="margin-top: 0px;" class="alert alert-danger">
                         {{ session()->get('message') }}
                     </div>
-                    <br><br>
                 @endif
 
-                <br><br>
-                <br><br>
+                <br>
                 <div class="row">
-                    <br><br>
-                    <div v-for="(product,index) in products" v-if="products" class="col-md-4">
-                        <div class="card card-product">
-                            <div class="card-image" data-header-animation="true">
-                                <a href="#pablo">
-                                    <img class="img" src="/assets/img/card-2.jpeg">
-                                </a>
+
+                    <div class="col-md-12">
+                        <div class="card card-testimonial">
+                            <div class="col-md-6 col-md-offset-3 text-center">
+                                <img align="middle" style="width: 300px;margin-bottom: 0px;margin-top: 0px;"
+                                     src="/assets/img/scope.png" alt=""/>
                             </div>
-                            <div class="card-content">
-                                <div class="card-actions">
-                                    <button @click="addToCart(product.id)" type="button"
-                                            class="btn btn-success btn-simple" rel="tooltip"
-                                            data-placement="bottom" title="Edit">
-                                        <i class="material-icons">add</i>
+                            <br><br>
+                            <br><br>
+                            <div class="footer">
+                                <div class="col-xs-8 col-md-12">
+                                    <h4>The Amount</h4>
+                                </div>
+                                <div class="col-xs-8 col-md-6">
+                                    <div style="width: 100%;" class="form-group">
+                                        <input @change="sendTheValue()" v-model="price" class="form-control"
+                                               type="text">
+                                        <span class="material-input"></span>
+                                    </div>
+                                </div>
+                                <div style=" margin-top: 15px;" class="col-xs-4 col-md-2">
+                                    <button style="padding: 0px;" @click="addFifty()" type="button"
+                                            class=" btn btn-info btn-simple">
+                                        + 50
+                                    </button>
+                                    <button style="padding: 0px;" @click="deleteFifty()"
+                                            class="btn btn-simple btn-danger" v-if="price">
+                                        - 50
                                     </button>
                                 </div>
-                                <h4 class="card-title">
-                                    <a href="#pablo">@{{ product.name }}</a>
-                                </h4>
-                                <div class="card-description">
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet asperiores
-                                </div>
-                            </div>
-                            <div class="card-footer">
-                                <div class="price">
-                                    <h4>@{{ product.value }} $</h4>
-                                </div>
-                                <div class="stats pull-right">
+                                <br><br>
+                                <br><br>
+                                <br>
+                                <div class="col-md-12">
+                                    <div v-if="price" style="background: #ea4c89 !important;" class="card-avatar">
+                                        <form method="post" action="/checkout">
+                                            {{csrf_field()}}
+                                            <button type="submit">
+                                                <img style="background: #ea4c89 !important;width: 100%" class="img"
+                                                     src="/assets/img/faces/card-profile1-square.png"/>
+                                            </button>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+
+
+                {{--</div>--}}
             </div>
         </div>
         <footer class="footer">

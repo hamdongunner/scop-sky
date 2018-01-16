@@ -22,6 +22,7 @@ class CreateCustomersTable extends Migration
             $table->string('cabinet_number');
             $table->string('user_name')->unique();
             $table->string('password');
+            $table->rememberToken();
             $table->timestamps();
         });
     }

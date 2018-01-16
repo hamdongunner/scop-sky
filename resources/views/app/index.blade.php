@@ -7,7 +7,6 @@
         <div class="full-page pricing-page" data-image="/assets/img/bg-pricing.jpeg">
             <div class="content" style="background: #fff;">
                 <div class="container">
-
                     <div class="row">
                         <div class="col-md-6 col-md-offset-3 text-center">
                             <img align="middle" style="width: 300px;margin-bottom: -90px;margin-top: 40px;" src="/assets/img/scope.png" alt=""/>

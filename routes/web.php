@@ -10,7 +10,7 @@ Route::get('/', 'HomeController@index');
 Route::get('login', 'HomeController@loginView');
 Route::post('login', 'HomeController@login');
 Route::get('wireless', 'HomeController@getWirelessView');
-Route::get('checkout', 'HomeController@checkoutView');
+Route::get('wireless/checkout', 'HomeController@checkoutView');
 Route::post('checkout', 'HomeController@checkout');
 Route::get('redirect', 'HomeController@checkRedirect');
 ///--------------------------------------------- VUE
@@ -19,6 +19,7 @@ Route::get('get-cart', 'HomeController@getCartCount');
 Route::get('get-companies', 'HomeController@getCompanies');
 Route::get('cart-add/{id}', 'HomeController@cardAdd');
 Route::get('company-add/{id}', 'HomeController@companyAdd');
+Route::get('price-add/{price}', 'HomeController@priceAdd');
 ///----------------------------------------------- DASHBOARD
 Route::get('/auth', 'DashController@authView');
 Route::post('/auth', 'DashController@authAdmin');
@@ -30,6 +31,8 @@ Route::post('/auth', 'DashController@authAdmin');
 Route::group(['middleware' => 'customer'], function () {
 
     Route::get('ftth', 'HomeController@getFtthView');
+    Route::get('ftth/checkout', 'HomeController@checkoutFtthView');
+
 });
 /*
  |--------------------------------------------------------------------------
@@ -69,6 +72,8 @@ Route::group(['middleware' => 'superadmin', 'prefix' => 'dashboard'], function (
     Route::get('card/edit/{id}', 'CardController@cardEditView');
     Route::post('card/edit/{id}', 'CardController@cardEdit');
     Route::get('card/delete/{id}', 'CardController@cardDelete');
+    Route::get('value', 'CardController@valueView');
+    Route::post('value', 'CardController@value');
     ///--------------------------------------------- COMPANIES
     Route::get('companies', 'DashController@companies');
     Route::get('company/add', 'CompanyController@companyAddView');
@@ -83,4 +88,6 @@ Route::group(['middleware' => 'superadmin', 'prefix' => 'dashboard'], function (
     Route::get('ftth/edit/{id}', 'CustomerController@ftthEditView');
     Route::post('ftth/edit/{id}', 'CustomerController@ftthEdit');
     Route::get('ftth/delete/{id}', 'CustomerController@ftthDelete');
+    ///--------------------------------------------- Wireless
+    Route::get('wireless/delete/{id}', 'CardController@WirelessDelete');
 });

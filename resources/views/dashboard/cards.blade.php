@@ -27,7 +27,6 @@
                                     <thead>
                                     <tr>
                                         <th>Name</th>
-                                        <th>Type</th>
                                         <th>Value</th>
                                         <th>Created at</th>
                                         <th>Updated at</th>
@@ -37,7 +36,6 @@
                                     <tfoot>
                                     <tr>
                                         <th>Name</th>
-                                        <th>Type</th>
                                         <th>Value</th>
                                         <th>Created at</th>
                                         <th>Updated at</th>
@@ -48,7 +46,6 @@
                                     @foreach($cards as $card)
                                         <tr>
                                             <td>{{$card->name}}</td>
-                                            <td>{{$card->type}}</td>
                                             <td>{{$card->value}}</td>
                                             <td>{{$card->created_at}}</td>
                                             <td>{{$card->updated_at}}</td>

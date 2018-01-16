@@ -67,11 +67,19 @@
                 <li class="@yield('cards')">
                     <a href="/dashboard/cards">
                         <i class="material-icons">credit_card</i>
-                        <p>Cards
+                        <p>FTTH Cards
                         </p>
                     </a>
 
                 </li>
+                    <li class="@yield('wireless')">
+                        <a href="/dashboard/value">
+                            <i class="material-icons">attach_money</i>
+                            <p>Wireless Values
+                            </p>
+                        </a>
+
+                    </li>
 
                 <li class="@yield('companies')">
                     <a href="/dashboard/companies">

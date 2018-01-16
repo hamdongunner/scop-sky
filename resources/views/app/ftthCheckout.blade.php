@@ -4,7 +4,7 @@
 @section('content')
 
 
-    <div id="root">
+    <div id="root" class="main-panel">
         <br><br>
         <div class="container-fluid">
             <div style="margin-top: 0px;margin-bottom: 0px;" class=" navbar-fixed-top">
@@ -31,7 +31,7 @@
             <br>
             <div class="row">
 
-                <div class="col-md-12">
+                <div class="col-md-11">
 
                     <div class="card card-testimonial">
                         <br>
@@ -39,14 +39,33 @@
                         </h4>
                         <br>
                         <div class="footer">
+                            <table class="table">
+                                <tbody>
+                                @foreach($items as $item)
+                                    <tr>
+                                        <td>
+                                            <div class="flag">
+                                                <img src="/images/{{$item['image']}}">
+                                            </div>
+                                        </td>
+                                        <td>{{$item['name']}}</td>
+                                        <td class="text-right">
+                                            $ {{$item['value']}}
+                                        </td>
+                                        <td class="text-right">
+                                            X {{ $item['quantity'] }}
+                                        </td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
+                            <br><br>
                             <div class="col-xs-8 col-xs-offset-2">
-                                <input class="form-control" disabled value="{{$price}}" type="text">
+                                <h4 class="text-danger"> Total : IQD {{$IQD}}</h4>
                             </div>
-                            <br><br>
-                            <br><br>
-                                <div class="col-xs-8 col-xs-offset-2">
-                                    <h4 class="text-danger"> Total : IQD {{$amount}}</h4>
-                                </div>
+                            <div class="col-xs-8 col-xs-offset-2">
+                                <h4 class="text-danger"> Total : $ {{$amount}}</h4>
+                            </div>
 
                             <br>
                             <div class="card-content">
@@ -75,6 +94,7 @@
                                         <img class="img" src="/assets/img/faces/card-profile1-square.png"/>
                                     </button>
                                 </form>
+
                             </div>
                         </div>
                     </div>
@@ -82,8 +102,9 @@
 
             </div>
         </div>
-
-        <footer class="footer navbar-fixed-bottom">
+        <br><br>
+        <br>
+        <footer class="footer">
             <div class="container">
                 <nav class="pull-left">
                     <ul>
