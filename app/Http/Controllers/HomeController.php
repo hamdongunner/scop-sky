@@ -8,6 +8,7 @@ use App\Order;
 use App\Wireless;
 use DateTime;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
@@ -24,15 +25,18 @@ class HomeController extends Controller
     private $transactionRedirectURL = 'https://api.zaincash.iq/transaction/pay?id=';
 
 
-    public function index()
+    public function index($lang = 'ar-KW')
     {
-
+        App::setLocale($lang);
+        session(['language' => $lang]);
         return view('app.index');
     }
 
     public function getWirelessView()
     {
-//        session()->flush();
+        $lang = 'ar-KW';
+        $lang = session()->get('language');
+        App::setLocale($lang);
         $wireless = Wireless::all();
         $companies = Company::all();
         return View('app.wireless', compact('wireless', 'companies'));
@@ -41,11 +45,18 @@ class HomeController extends Controller
 
     public function getFtthView()
     {
+        $lang = 'ar-KW';
+        $lang = session()->get('language');
+        App::setLocale($lang);
         return View('app.ftth');
     }
 
     public function loginView()
     {
+        $lang = 'ar-KW';
+        $lang = session()->get('language');
+        App::setLocale($lang);
+
         if (Auth::guard('app'))
             return redirect('ftth');
         return View('app.login');
@@ -70,6 +81,9 @@ class HomeController extends Controller
 
     public function checkoutFtthView()
     {
+        $lang = 'ar-KW';
+        $lang = session()->get('language');
+        App::setLocale($lang);
 
         $items = collect(Session::get('cart'));
         $amount = 0;
@@ -83,13 +97,12 @@ class HomeController extends Controller
 
     public function checkoutView()
     {
+        $lang = 'ar-KW';
+        $lang = session()->get('language');
+        App::setLocale($lang);
 
         $amount = 0;
         $price = Session::get('price');
-//        $items = collect(Session::get('cart'));
-//        foreach ($items as $item) {
-//            $amount = $amount + $item['value'] * $item['quantity'];
-//        }
         if ($amount == 0)
             return redirect()->back()->with('message', 'السلة فارغ ');
         return View('app.checkout', compact('price', 'amount'));
@@ -98,7 +111,6 @@ class HomeController extends Controller
 
     public function checkout()
     {
-//        return Auth::guard('app')->user()->company_id;
         $cart = collect(Session::get('cart'));
         $amount = 0;
         $items = [];
@@ -109,7 +121,8 @@ class HomeController extends Controller
             $quantities[] = $item['quantity'];
             $amount = $amount + $item['value'] * $item['quantity'];
         }
-//        $items = serialize($items);
+        if ($amount == 0)
+            return redirect()->back()->with('message', 'السلة فارغ ');
         $order = new Order;
         $order->items = $items;
         $order->quantities = $quantities;
@@ -124,7 +137,7 @@ class HomeController extends Controller
         $order->save();
         session()->flush();
         $this->charge(250, 'ScopeSky', $order->id);
-        return;
+
     }
 
 
@@ -138,13 +151,13 @@ class HomeController extends Controller
         if ($validator->fails())
             return back()->withErrors($validator->errors())->withInput();
 
-        $amount = 0;
+
         $items = [];
         $quantities = [];
         $order = new Order;
         $order->items = $items;
         $order->quantities = $quantities;
-        $order->amount = $amount;
+        $order->amount = $request->value;
         $order->type = 'WIRELESS';
         $order->user_id = 0;
         if (!Auth::guard('app')->check())
@@ -235,6 +248,11 @@ class HomeController extends Controller
 
     public function checkRedirect()
     {
+        $lang = 'ar-KW';
+        $lang = session()->get('language');
+        App::setLocale($lang);
+
+        return View('app.done');
         session()->flush();
         if (isset($_GET['token'])) {
             $result = $this->decode($_GET['token']);

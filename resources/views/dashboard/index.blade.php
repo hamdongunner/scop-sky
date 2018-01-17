@@ -69,7 +69,7 @@
                         <i class="material-icons">assignment_turned_in</i>
                     </div>
                     <div class="card-content">
-                        <p class="category">Processed</p>
+                        <p class="category">Done</p>
                         <h3 class="card-title">{{$processed}}</h3>
                     </div>
                     <div class="card-footer">

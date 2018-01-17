@@ -37,8 +37,8 @@
 
                     <div class="card card-testimonial">
                         <br>
-                        <h4>The Checkout
-                        </h4>
+                        <h3>{{ __('lang.p4_checkout') }}
+                        </h3>
                         <br>
                         <div class="footer">
                             <table class="table">
@@ -63,7 +63,7 @@
                             </table>
                             <br>
                             <div class="col-xs-8 col-xs-offset-2">
-                                <h4 class="text-danger"> Total : IQD {{$amount}}</h4>
+                                <h4 class="text-danger"> {{ __('lang.p4_total') }} : IQD {{$amount}}</h4>
                             </div>
 
                             <br>

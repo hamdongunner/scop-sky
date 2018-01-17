@@ -38,7 +38,7 @@ class OrderController extends Controller
     public function orderProcessed($id)
     {
         $order = Order::find($id);
-        $order->status = 'Processed';
+        $order->status = 'Done';
         $order->update();
 
         return redirect('/dashboard/order/view/' . $id);

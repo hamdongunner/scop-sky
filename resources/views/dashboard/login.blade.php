@@ -24,12 +24,16 @@
 <body class="off-canvas-sidebar">
 
 <div class="wrapper wrapper-full-page">
-    <div class="full-page register-page" filter-color="black" data-image="../../assets/img/register.jpeg">
+    <div class="full-page register-page" filter-color="black" data-image="/assets/img/register.jpeg">
         <div class="container">
             <div class="row">
                 <div class="col-md-10 col-md-offset-1">
                     <div class="card card-signup">
-                        <h2 class="card-title text-center">Login</h2>
+                        <div class="row">
+                            <div class="col-md-6 col-md-offset-3 text-center">
+                                <img align="middle" style="width: 300px;margin-bottom: -90px;margin-top: 40px;" src="/assets/img/scope.png" alt=""/>
+                            </div>
+                        </div>
                         <div class="row">
                             <br>
                             @if($errors->count() >0)

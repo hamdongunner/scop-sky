@@ -61,7 +61,7 @@
                                     <a href="#pablo">@{{ product.name }} @{{ product.value }} $</a>
                                 </h4>
                                 <div class="card-description">
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet asperiores
+                                    @{{ product.description }}
                                 </div>
                             </div>
                             <div class="card-footer">
@@ -69,11 +69,14 @@
                                     <button @click="addToCart(product.id)" type="button"
                                             class="btn btn-success" rel="tooltip"
                                             data-placement="bottom" title="Edit">
-                                        Add To Cart
+                                        {{ __('lang.p3_add_to_cart') }}
                                     </button>
-                                    <button @click="deleteFromCart(product.id)" class="btn btn-danger" v-if="product.show">Delete</button>
-                                </div>
-                                <div class="stats pull-right">
+                                    <button @click="deleteFromCart(product.id)" class="btn btn-danger" v-if="product.show" >
+                                            {{ __('lang.p3_delete_from_cart') }}
+                                            </button>
+                                        </div>
+                                        <div class=" stats pull-right
+                                    ">
                                 </div>
                             </div>
                         </div>

@@ -15,9 +15,10 @@ class DashController extends Controller
 {
     public function index()
     {
+        return View('dashboard.login');
         $orders = Order::where('status','!=','uncompleted')->get();
         $processingOrder = Order::where('status','=','Processing')->get();
-        $processedOrder = Order::where('status','=','Processed')->get();
+        $processedOrder = Order::where('status','=','Done')->get();
         $new = Order::where('status','=','new')->get();
         $all = count($orders);
         $processed = count($processedOrder);

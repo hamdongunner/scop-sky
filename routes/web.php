@@ -93,3 +93,6 @@ Route::group(['middleware' => 'superadmin', 'prefix' => 'dashboard'], function (
     ///--------------------------------------------- Wireless
     Route::get('wireless/delete/{id}', 'CardController@WirelessDelete');
 });
+
+
+Route::get('{lang}', 'HomeController@index');

@@ -2,11 +2,16 @@
 
 
 @section('content')
-    <div class="wrapper wrapper-full-page">
-        <div class="full-page login-page" filter-color="black" data-image="../../assets/img/login.jpeg">
+    <div style="background: #fff" class="wrapper wrapper-full-page">
+        <div style="background: #fff" class="full-page login-page" filter-color="black" data-image="../../assets/img/login.jpeg">
             <!--   you can change the color of the filter page using: data-color="blue | purple | green | orange | red | rose " -->
-            <div class="content">
+            <div style="background: #fff" class="content">
                 <div class="container">
+                    <div class="row">
+                        <div class="col-md-6 col-md-offset-3 text-center">
+                            <img align="middle" style="width: 200px;margin-bottom: 20px;margin-top: -100px;" src="/assets/img/scope.png" alt=""/>
+                        </div>
+                    </div>
                     <div class="row">
                         <div class="col-md-4 col-sm-6 col-md-offset-4 col-sm-offset-3">
                             <form method="POST" action="login">
@@ -65,8 +70,8 @@
                     </div>
                 </div>
             </div>
-            <footer class="footer navbar-fixed-bottom">
-                <div class="container">
+            <footer style="background: #000" class="footer navbar-fixed-bottom">
+                <div style="background: #000" class="container">
                     <nav class="pull-left">
                         <ul>
                             <li>

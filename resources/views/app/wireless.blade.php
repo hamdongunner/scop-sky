@@ -48,7 +48,7 @@
                                 <form method="post" action="/wireless/checkout">
                                     {{csrf_field()}}
                                     <div class="col-xs-12 col-md-12">
-                                        <h4 style="margin-bottom: -10px;">The Amount</h4>
+                                        <h3 style="margin-bottom: -10px;">{{ __('lang.p2_amount') }}</h3>
                                     </div>
                                     <div class="row">
                                         <div class="col-xs-10 col-xs-push-1">
@@ -64,7 +64,7 @@
                                         </div>
                                     </div>
                                     <div class="col-xs-12 col-md-12">
-                                        <h4 style="margin-bottom: -10px;">The Company</h4>
+                                        <h3 style="margin-bottom: -10px;">{{ __('lang.p2_company') }}</h3>
                                     </div>
                                     <div class="row">
                                         <div class="col-xs-10 col-xs-push-1">
@@ -73,7 +73,7 @@
                                                 <select required name="company" class="selectpicker"
                                                         data-style="btn btn-linkedin btn-round" title="Choose Company"
                                                         data-size="7" tabindex="-98">
-                                                    <option disabled="" selected="">Choose Company</option>
+                                                    <option disabled="" selected="">{{ __('lang.p2_choose_company') }}</option>
                                                     @foreach($companies as $company)
                                                         <option value="{{$company->id}}">{{$company->name}}</option>
                                                     @endforeach

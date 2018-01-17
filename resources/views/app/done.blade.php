@@ -37,25 +37,15 @@
 
                     <div class="card card-testimonial">
                         <br>
-                        <h1>تمت العملية
-                        </h1>
+                        <h1>{{ __('lang.p5_done') }}</h1>
                         <div class="container-fluid">
-                            <h4>! تم ارسال طلبك بنجاح </h4>
-                            <h4>.سيقوم فريق سكوب سكاي بمراجعة طلبك قريباً</h4>
+                            <h4>{{ __('lang.p5_request') }}</h4>
+                            <h4>{{ __('lang.p5_team') }}</h4>
                         </div>
                         <br>
                         <div class="footer">
-                            <button style="margin-bottom: 40px;" class="btn btn-linkedin">الرجوع الى الصفحة الرئيسية</button>
+                            <button style="margin-bottom: 40px;" class="btn btn-linkedin">{{ __('lang.p5_button') }}</button>
                             <br>
-                            {{--<div style="background: #ea4c89" class="card-avatar">--}}
-                                {{--<form method="post" action="/ftth/checkout">--}}
-                                    {{--{{csrf_field()}}--}}
-                                    {{--<button type="submit">--}}
-                                        {{--<img class="img" src="/assets/img/faces/card-profile1-square.png"/>--}}
-                                    {{--</button>--}}
-                                {{--</form>--}}
-
-                            {{--</div>--}}
                         </div>
                     </div>
                 </div>
