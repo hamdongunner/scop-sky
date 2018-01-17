@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Card;
 use App\Company;
 use App\Order;
-use App\Rate;
 use App\Wireless;
 use DateTime;
 use Illuminate\Http\Request;
@@ -47,8 +46,8 @@ class HomeController extends Controller
 
     public function loginView()
     {
-       if( Auth::guard('app'))
-           return redirect('ftth');
+        if (Auth::guard('app'))
+            return redirect('ftth');
         return View('app.login');
     }
 
@@ -77,13 +76,15 @@ class HomeController extends Controller
         foreach ($items as $item) {
             $amount = $amount + $item['value'] * $item['quantity'];
         }
+        if($amount <= 0)
+            return redirect()->back();
         return View('app.ftthCheckout', compact('items', 'amount', 'IQD'));
     }
 
     public function checkoutView()
     {
-        $amount = 0;
 
+        $amount = 0;
         $price = Session::get('price');
 //        $items = collect(Session::get('cart'));
 //        foreach ($items as $item) {
@@ -116,13 +117,13 @@ class HomeController extends Controller
         $order->type = 'FTTH';
         $order->user_id = 0;
 //        if (!Auth::guard('app')->check()){
-            $order->user_id = Auth::guard('app')->user()->id;
-            $order->company_id = Auth::guard('app')->user()->company_id;
+        $order->user_id = Auth::guard('app')->user()->id;
+        $order->company_id = Auth::guard('app')->user()->company_id;
 //        }
         $order->status = 'new';
         $order->save();
         session()->flush();
-        $this->charge(250, 'ScopeSky', 'Order_00001');
+        $this->charge(250, 'ScopeSky', $order->id);
         return;
     }
 
@@ -152,8 +153,8 @@ class HomeController extends Controller
         $order->status = 'uncompleted';
         $order->save();
         session()->flush();
-        $this->charge(250, 'ScopeSky', 'Order_00001');
-        return;
+
+        $this->charge(250, 'ScopeSky',$order->id);
     }
 
 //----------------------------PAY INTEGRATION---------------------------------//
@@ -234,17 +235,19 @@ class HomeController extends Controller
 
     public function checkRedirect()
     {
-
+        session()->flush();
         if (isset($_GET['token'])) {
             $result = $this->decode($_GET['token']);
             if ($result['status'] == 'success') {
-                return 5;
+                $order = Order::find($result['orderid']);
+                $order->msisdn = $result['msisdn'];
+                $order->status = 'new';
+                $order->save();
+                return View('app.done');
             } else {
-                return 6;
+                return View('app.fail');
             }
         }
-        session()->flush();
-        return redirect('/');
     }
 
     public function decode($token)
@@ -305,7 +308,7 @@ class HomeController extends Controller
         } catch (\Exception $e) {
         }
 
-        if ($bool){
+        if ($bool) {
             $array = collect($array);
             $array->forget($id);
             $array = $array->toArray();

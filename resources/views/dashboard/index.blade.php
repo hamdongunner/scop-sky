@@ -98,6 +98,7 @@
                                 <thead>
                                 <tr>
                                     <th>UserName</th>
+                                    <th>Wallet</th>
                                     <th>Amount</th>
                                     <th>Company Name</th>
                                     <th>Cards</th>
@@ -111,6 +112,7 @@
                                 <tfoot>
                                 <tr>
                                     <th>UserName</th>
+                                    <th>Wallet</th>
                                     <th>Amount</th>
                                     <th>Company Name</th>
                                     <th>Cards</th>
@@ -125,6 +127,7 @@
                                 @foreach($new as $order)
                                     <tr>
                                         <td>{{$order->customer->user_name or 'Wireless Customer' }}</td>
+                                        <td>{{$order->msisdn}}</td>
                                         <td>{{$order->amount}}</td>
                                         <td>{{$order->company->name}}</td>
                                         <td>{{$order['cards'] or $order->amount}}</td>

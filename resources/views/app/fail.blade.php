@@ -37,50 +37,25 @@
 
                     <div class="card card-testimonial">
                         <br>
-                        <h4>The Checkout
-                        </h4>
+                        <h1>تمت العملية
+                        </h1>
+                        <div class="container-fluid">
+                            <h4>! تم ارسال طلبك بنجاح </h4>
+                            <h4>.سيقوم فريق سكوب سكاي بمراجعة طلبك قريباً</h4>
+                        </div>
                         <br>
                         <div class="footer">
-                            <table class="table">
-                                <tbody>
-                                @foreach($items as $item)
-                                    <tr>
-                                        <td>
-                                            <div class="flag">
-                                                <img src="/images/{{$item['image']}}">
-                                            </div>
-                                        </td>
-                                        <td>{{$item['name']}}</td>
-                                        <td class="text-right">
-                                            $ {{ $item['value']}}
-                                        </td>
-                                        <td class="text-right">
-                                            X {{ $item['quantity'] }}
-                                        </td>
-                                    </tr>
-                                @endforeach
-                                </tbody>
-                            </table>
+                            <button style="margin-bottom: 40px;" class="btn btn-linkedin">الرجوع الى الصفحة الرئيسية</button>
                             <br>
-                            <div class="col-xs-8 col-xs-offset-2">
-                                <h4 class="text-danger"> Total : IQD {{$amount}}</h4>
-                            </div>
+                            {{--<div style="background: #ea4c89" class="card-avatar">--}}
+                            {{--<form method="post" action="/ftth/checkout">--}}
+                            {{--{{csrf_field()}}--}}
+                            {{--<button type="submit">--}}
+                            {{--<img class="img" src="/assets/img/faces/card-profile1-square.png"/>--}}
+                            {{--</button>--}}
+                            {{--</form>--}}
 
-                            <br>
-                            <div class="card-content">
-                                <div class="card-description">
-
-                                </div>
-                            </div>
-                            <div style="background: #ea4c89" class="card-avatar">
-                                <form method="post" action="/ftth/checkout">
-                                    {{csrf_field()}}
-                                    <button type="submit">
-                                        <img class="img" src="/assets/img/faces/card-profile1-square.png"/>
-                                    </button>
-                                </form>
-
-                            </div>
+                            {{--</div>--}}
                         </div>
                     </div>
                 </div>

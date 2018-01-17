@@ -55,7 +55,7 @@
                                             <div class="form-group label-floating is-empty">
                                                 <label class="control-label"></label>
                                                 <select required name="value" class="selectpicker"
-                                                        data-style="btn btn-primary btn-round"
+                                                        data-style="btn btn-linkedin btn-round"
                                                         data-size="7" tabindex="-98">
                                                     @foreach($wireless as $item)
                                                         <option value="{{$item->value}}">{{$item->value}}</option>
@@ -71,7 +71,7 @@
                                             <div class="form-group label-floating is-empty">
                                                 <label class="control-label"></label>
                                                 <select required name="company" class="selectpicker"
-                                                        data-style="btn btn-primary btn-round" title="Choose Company"
+                                                        data-style="btn btn-linkedin btn-round" title="Choose Company"
                                                         data-size="7" tabindex="-98">
                                                     <option disabled="" selected="">Choose Company</option>
                                                     @foreach($companies as $company)

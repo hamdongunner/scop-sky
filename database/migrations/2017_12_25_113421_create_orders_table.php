@@ -20,6 +20,7 @@ class CreateOrdersTable extends Migration
             $table->string('quantities');
             $table->string('status');
             $table->string('type');
+            $table->longText('msisdn');
             $table->integer('amount');
             $table->integer('user_id');
             $table->integer('company_id');
