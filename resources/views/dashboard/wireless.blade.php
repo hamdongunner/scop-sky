@@ -36,13 +36,13 @@
 
                         <div class="card-content">
                             <div class="row">
-                                <label class="col-sm-2 label-on-left">Name</label>
+                                <label class="col-sm-2 label-on-left">The Value</label>
                                 <div class="col-sm-10">
                                     <div class="form-group label-floating is-empty">
                                         <label class="control-label"></label>
-                                        <input name="value" type="text" class="form-control" value="{{ old('value') }}"
+                                        <input name="value" type="number" class="form-control" value="{{ old('value') }}"
                                                required/>
-                                        <span class="help-block">Enter the card name ...</span>
+                                        <span class="help-block">Enter Value ...</span>
                                     </div>
                                 </div>
                             </div>

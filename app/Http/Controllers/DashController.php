@@ -15,7 +15,6 @@ class DashController extends Controller
 {
     public function index()
     {
-        return View('dashboard.login');
         $orders = Order::where('status','!=','uncompleted')->get();
         $processingOrder = Order::where('status','=','Processing')->get();
         $processedOrder = Order::where('status','=','Done')->get();
@@ -78,6 +77,7 @@ class DashController extends Controller
 
         if ($validator->fails())
             return back()->withErrors($validator->errors())->withInput();
+
         $cred = $request->only('email', 'password');
         if (Auth::guard('web')->attempt($cred, true)) {
 //            return Auth::user();
@@ -109,7 +109,7 @@ class DashController extends Controller
     public function adminAdd(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'email'=>'required | unique:users',
+            'email'=>'required | email | unique:users',
             'name'=>'required',
             'password'=>'required|min:6',
             're_password'=>'required|same:password',
@@ -137,8 +137,8 @@ class DashController extends Controller
     public function adminEdit(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [
-            'email'=>'required',
-            'name'=>'required',
+            'email'=>'required | email | unique:users',
+            'name'=>'required | string',
             'password'=>'required|min:6',
             're_password'=>'required|same:password',
             'is_admin'=>'required',

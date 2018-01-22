@@ -3,13 +3,15 @@
 
 @section('content')
     <div style="background: #fff" class="wrapper wrapper-full-page">
-        <div style="background: #fff" class="full-page login-page" filter-color="black" data-image="../../assets/img/login.jpeg">
+        <div style="background: #fff" class="full-page login-page" filter-color="black"
+             data-image="../../assets/img/login.jpeg">
             <!--   you can change the color of the filter page using: data-color="blue | purple | green | orange | red | rose " -->
             <div style="background: #fff" class="content">
                 <div class="container">
                     <div class="row">
                         <div class="col-md-6 col-md-offset-3 text-center">
-                            <img align="middle" style="width: 200px;margin-bottom: 20px;margin-top: -100px;" src="/assets/img/scope.png" alt=""/>
+                            <img align="middle" style="width: 200px;margin-bottom: 20px;margin-top: -100px;"
+                                 src="/assets/img/scope.png" alt=""/>
                         </div>
                     </div>
                     <div class="row">
@@ -24,19 +26,8 @@
                                     </div>
                                 @endif
                                 <div class="card card-login card-hidden">
-                                    <div class="card-header text-center" data-background-color="rose">
+                                    <div class="card-header text-center" data-background-color="blue">
                                         <h4 class="card-title">Login</h4>
-                                        {{--<div class="social-line">--}}
-                                            {{--<a href="#btn" class="btn btn-just-icon btn-simple">--}}
-                                                {{--<i class="fa fa-facebook-square"></i>--}}
-                                            {{--</a>--}}
-                                            {{--<a href="#pablo" class="btn btn-just-icon btn-simple">--}}
-                                                {{--<i class="fa fa-twitter"></i>--}}
-                                            {{--</a>--}}
-                                            {{--<a href="#eugen" class="btn btn-just-icon btn-simple">--}}
-                                                {{--<i class="fa fa-google-plus"></i>--}}
-                                            {{--</a>--}}
-                                        {{--</div>--}}
                                     </div>
                                     <p class="category text-center">
                                     </p>
@@ -62,7 +53,8 @@
                                         </div>
                                     </div>
                                     <div class="footer text-center">
-                                        <button type="submit" class="btn btn-rose btn-simple btn-wd btn-lg">Let's go</button>
+                                        <button type="submit" class="btn btn-rose btn-simple btn-wd btn-lg">Let's go
+                                        </button>
                                     </div>
                                 </div>
                             </form>

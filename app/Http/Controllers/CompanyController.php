@@ -23,8 +23,8 @@ class CompanyController extends Controller
     public function companyAdd(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'required',
-            'address' => 'required',
+            'name' => 'required | string',
+            'address' => 'required | string',
         ]);
 
         if ($validator->fails())
@@ -47,8 +47,8 @@ class CompanyController extends Controller
     public function companyEdit(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'required',
-            'address' => 'required',
+            'name' => 'required | string',
+            'address' => 'required | string',
         ]);
 
         if ($validator->fails())

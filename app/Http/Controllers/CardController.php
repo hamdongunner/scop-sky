@@ -18,10 +18,10 @@ class CardController extends Controller
     public function cardAdd(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'required',
-            'value' => 'required',
+            'name' => 'required | string',
+            'value' => 'required | numeric',
             'avatar' => 'required',
-            'description' => 'required',
+            'description' => 'required | string',
         ]);
 
         if ($validator->fails())
@@ -68,9 +68,9 @@ class CardController extends Controller
     public function cardEdit(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'required',
-            'value' => 'required',
-            'description' => 'required',
+            'name' => 'required | string',
+            'value' => 'required | numeric',
+            'description' => 'required | string',
         ]);
 
         if ($validator->fails())
@@ -103,6 +103,13 @@ class CardController extends Controller
 
     public function value(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'value' => 'required | numeric',
+        ]);
+
+        if ($validator->fails())
+            return back()->withErrors($validator->errors())->withInput();
+
         $wireless = new Wireless;
         $wireless->value = $request->value;
         $wireless->save();

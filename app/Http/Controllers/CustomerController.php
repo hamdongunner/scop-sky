@@ -21,10 +21,10 @@ class CustomerController extends Controller
             'user_name'=>'required | unique:customers',
             'password'=>'required|min:6',
             're_password'=>'required|same:password',
-            'first_name'=>'required',
-            'last_name'=>'required',
+            'first_name'=>'required | string',
+            'last_name'=>'required | string',
             'phone'=>'required',
-            'address'=>'required',
+            'address'=>'required | string',
             'cabinet_number'=>'required',
             'company'=>'required'
         ]);
@@ -38,7 +38,7 @@ class CustomerController extends Controller
         $customer->first_name = $request->first_name;
         $customer->last_name = $request->last_name;
         $customer->phone = $request->phone;
-        $customer->company_id = $request->company;
+        $customer->company = $request->company;
         $customer->address = $request->address;
         $customer->cabinet_number = $request->cabinet_number;
         $customer->save();
@@ -63,11 +63,12 @@ class CustomerController extends Controller
             'user_name'=>'required',
             'password'=>'required|min:6',
             're_password'=>'required|same:password',
-            'first_name'=>'required',
-            'last_name'=>'required',
+            'first_name'=>'required | string',
+            'last_name'=>'required | string',
             'phone'=>'required',
-            'address'=>'required',
+            'address'=>'required | string',
             'cabinet_number'=>'required',
+            'company'=>'required'
         ]);
 
         if ($validator->fails())
@@ -79,6 +80,7 @@ class CustomerController extends Controller
         $customer->first_name = $request->first_name;
         $customer->last_name = $request->last_name;
         $customer->phone = $request->phone;
+        $customer->company = $request->company;
         $customer->address = $request->address;
         $customer->cabinet_number = $request->cabinet_number;
         $customer->update();

@@ -121,21 +121,19 @@
                                         </div>
                                     </div>
                                 </div>
+
                                 <div class="row">
-                                    <div class="col-xs-10 col-xs-push-1">
+                                    <label class="col-sm-2 label-on-left">Company Name</label>
+                                    <div class="col-sm-10">
                                         <div class="form-group label-floating is-empty">
                                             <label class="control-label"></label>
-                                            <select required name="company" class="selectpicker"
-                                                    data-style="btn btn-primary btn-round" title="Choose Company"
-                                                    data-size="7" tabindex="-98">
-                                                <option disabled="" selected="">Choose Company</option>
-                                                @foreach($companies as $company)
-                                                    <option value="{{$company->id}}">{{$company->name}}</option>
-                                                @endforeach
-                                            </select></div>
-                                        {{--<span class="help-block">Enter the type of the card ...</span>--}}
+                                            <input name="company" type="text" class="form-control"
+                                                   required value="{{ old('company') }}" />
+                                            <span class="help-block">Enter the Company Name ...</span>
+                                        </div>
                                     </div>
                                 </div>
+
 
                                 <br>
                                 <button type="submit" class="btn btn-fill btn-rose">Submit

@@ -57,7 +57,7 @@
                                             <td>{{$order->customer->user_name or 'Wireless Customer' }}</td>
                                             <td>{{$order->msisdn}}</td>
                                             <td>{{$order->amount}}</td>
-                                            <td>{{$order->company->name}}</td>
+                                            <td>{{$order->company}}</td>
                                             <td>{{$order['cards']}}</td>
                                             <td>{{$order->type}}</td>
                                             <td>{{$order->status}}</td>

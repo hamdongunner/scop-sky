@@ -38,7 +38,7 @@
 
                 <br>
                 <div class="row">
-                    <div class="col-md-12">
+                    <div class="col-md-8 col-md-offset-2">
                         <div class="card card-testimonial">
                             <div class="col-md-6 col-md-offset-3 text-center">
                                 <img align="middle" style="width: 300px;margin-bottom: 0px;margin-top: 30px;"
@@ -55,9 +55,10 @@
                                             <div class="form-group label-floating is-empty">
                                                 <label class="control-label"></label>
                                                 <select required name="value" class="selectpicker"
-                                                        data-style="btn btn-linkedin btn-round"
-                                                        data-size="7" tabindex="-98">
-                                                    @foreach($wireless as $item)
+                                                        data-style="btn btn-linkedin btn-round" tabindex="-98">
+                                                    <option disabled="" selected="">{{ __('lang.p2_amount') }}</option>
+
+                                                @foreach($wireless as $item)
                                                         <option value="{{$item->value}}">{{$item->value}}</option>
                                                     @endforeach
                                                 </select></div>
@@ -78,15 +79,14 @@
                                                         <option value="{{$company->id}}">{{$company->name}}</option>
                                                     @endforeach
                                                 </select></div>
-                                            {{--<span class="help-block">Enter the type of the card ...</span>--}}
                                         </div>
                                     </div>
                                     <br>
                                     <br>
                                     <div class="col-md-12">
                                         <div style="background: #ea4c89 !important;" class="card-avatar">
-                                            <button type="submit">
-                                                <img style="background: #ea4c89 !important;width: 100%" class="img"
+                                            <button style="background: #ea4c89 !important; border: #ea4c89 !important;"  type="submit">
+                                                <img style="background: rgb(234, 76, 137) !important;"class="img"
                                                      src="/assets/img/faces/card-profile1-square.png"/>
                                             </button>
                                         </div>

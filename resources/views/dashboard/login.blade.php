@@ -48,6 +48,15 @@
                                 <br>
                                 <form class="form" method="POST" action="/auth">
                                     {{csrf_field()}}
+                                    <br>
+                                    @if($errors->count() >0)
+                                        <div class="alert alert-danger">
+                                            @foreach($errors->all() as $error)
+                                                <li>{{$error}}</li>
+                                            @endforeach
+                                        </div>
+                                    @endif
+                                    <br>
                                     <div class="card-content">
                                         <div class="input-group">
                                                 <span class="input-group-addon">

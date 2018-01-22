@@ -45,17 +45,9 @@
                         </div>
                         <br>
                         <div class="footer">
-                            <button style="margin-bottom: 40px;" class="btn btn-linkedin">{{ __('lang.p5_button') }}</button>
+                            <a href="/flush" style="margin-bottom: 40px;" class="btn btn-linkedin">{{ __('lang.p5_button') }}</a>
                             <br>
-                            {{--<div style="background: #ea4c89" class="card-avatar">--}}
-                            {{--<form method="post" action="/ftth/checkout">--}}
-                            {{--{{csrf_field()}}--}}
-                            {{--<button type="submit">--}}
-                            {{--<img class="img" src="/assets/img/faces/card-profile1-square.png"/>--}}
-                            {{--</button>--}}
-                            {{--</form>--}}
 
-                            {{--</div>--}}
                         </div>
                     </div>
                 </div>

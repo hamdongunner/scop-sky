@@ -12,7 +12,8 @@ Route::post('login', 'HomeController@login');
 Route::get('wireless', 'HomeController@getWirelessView');
 Route::get('wireless/checkout', 'HomeController@checkoutView');
 Route::post('wireless/checkout', 'HomeController@checkoutWireless');
-Route::get('redirect', 'HomeController@checkRedirect');
+Route::get('redirect', 'HomeController@checkRedirect')->name('redirect');
+Route::get('flush', 'HomeController@flush');
 ///--------------------------------------------- VUE
 Route::get('get-cards', 'HomeController@getCards');
 Route::get('get-cart', 'HomeController@getCartCount');

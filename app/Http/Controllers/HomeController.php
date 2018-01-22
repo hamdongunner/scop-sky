@@ -10,6 +10,7 @@ use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use Faker\Factory as Faker;
@@ -34,8 +35,10 @@ class HomeController extends Controller
 
     public function getWirelessView()
     {
+
         $lang = 'ar-KW';
-        $lang = session()->get('language');
+        if (session()->get('language'))
+            $lang = session()->get('language');
         App::setLocale($lang);
         $wireless = Wireless::all();
         $companies = Company::all();
@@ -57,7 +60,7 @@ class HomeController extends Controller
         $lang = session()->get('language');
         App::setLocale($lang);
 
-        if (Auth::guard('app'))
+        if (Auth::guard('app')->check())
             return redirect('ftth');
         return View('app.login');
     }
@@ -90,7 +93,7 @@ class HomeController extends Controller
         foreach ($items as $item) {
             $amount = $amount + $item['value'] * $item['quantity'];
         }
-        if($amount <= 0)
+        if ($amount <= 0)
             return redirect()->back();
         return View('app.ftthCheckout', compact('items', 'amount', 'IQD'));
     }
@@ -131,12 +134,11 @@ class HomeController extends Controller
         $order->user_id = 0;
 //        if (!Auth::guard('app')->check()){
         $order->user_id = Auth::guard('app')->user()->id;
-        $order->company_id = Auth::guard('app')->user()->company_id;
+        $order->company = Auth::guard('app')->user()->company;
 //        }
         $order->status = 'new';
         $order->save();
-        session()->flush();
-        $this->charge(250, 'ScopeSky', $order->id);
+        $this->charge($order->amount, 'ScopeSky', $order->id);
 
     }
 
@@ -144,14 +146,19 @@ class HomeController extends Controller
     public function checkoutWireless(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'company' => 'required',
-            'value' => 'required',
+            'company' => 'required | numeric',
+            'value' => 'required | numeric',
         ]);
 
+        $lang = 'ar-KW';
+        $lang = session()->get('language');
+        App::setLocale($lang);
+        $var = __('lang.p2_choose_company');
+
         if ($validator->fails())
-            return back()->withErrors($validator->errors())->withInput();
+            return back()->with('message', $var);
 
-
+        $company = Company::find($request->company);
         $items = [];
         $quantities = [];
         $order = new Order;
@@ -160,14 +167,10 @@ class HomeController extends Controller
         $order->amount = $request->value;
         $order->type = 'WIRELESS';
         $order->user_id = 0;
-        if (!Auth::guard('app')->check())
-            $order->user_id = Auth::user()->id;
-        $order->company_id = $request->company;
+        $order->company = $company->name;
         $order->status = 'uncompleted';
         $order->save();
-        session()->flush();
-
-        $this->charge(250, 'ScopeSky',$order->id);
+        $this->charge($order->amount, 'ScopeSky', $order->id);
     }
 
 //----------------------------PAY INTEGRATION---------------------------------//
@@ -191,6 +194,7 @@ class HomeController extends Controller
 
     private function encode($amount, $service_type, $order_id)
     {
+        dd(route('redirect'));
         $secret = $_ENV['ZC_SECRET'];
         $now = new DateTime();
         $payload = [
@@ -198,8 +202,8 @@ class HomeController extends Controller
             'serviceType' => $service_type,
             'msisdn' => $_ENV['ZC_MSISDN'],
             'orderId' => $order_id,
-            'redirectUrl' => 'http://localhost:8000/redirect',
-            'integrationUrl' => 'http://localhost:8000/redirect',
+            'redirectUrl' => route('redirect'),
+            'integrationUrl' => 1,
             'iat' => $now->getTimestamp(),
             'exp' => $now->getTimestamp() + 60 * 60 * 4
         ];
@@ -249,11 +253,11 @@ class HomeController extends Controller
     public function checkRedirect()
     {
         $lang = 'ar-KW';
-        $lang = session()->get('language');
+        if (session()->get('language') != null)
+            $lang = session()->get('language');
         App::setLocale($lang);
 
-        return View('app.done');
-        session()->flush();
+
         if (isset($_GET['token'])) {
             $result = $this->decode($_GET['token']);
             if ($result['status'] == 'success') {
@@ -264,8 +268,19 @@ class HomeController extends Controller
                 return View('app.done');
             } else {
                 return View('app.fail');
+
             }
         }
+    }
+
+    public function flush()
+    {
+        $lang = 'ar-KW';
+        if (session()->get('language') != null)
+            $lang = session()->get('language');
+        App::setLocale($lang);
+
+        return redirect('/'.$lang);
     }
 
     public function decode($token)

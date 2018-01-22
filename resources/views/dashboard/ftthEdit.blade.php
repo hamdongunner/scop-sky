@@ -122,6 +122,18 @@
                                     </div>
                                 </div>
 
+                                <div class="row">
+                                    <label class="col-sm-2 label-on-left">Company Name</label>
+                                    <div class="col-sm-10">
+                                        <div class="form-group label-floating is-empty">
+                                            <label class="control-label"></label>
+                                            <input name="company" type="number" class="form-control"
+                                                   required value="{{ $customer->company }}" />
+                                            <span class="help-block">Enter the Company Nane ...</span>
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <br>
                                 <button type="submit" class="btn btn-fill btn-rose">Submit
                                     <div class="ripple-container"></div>
