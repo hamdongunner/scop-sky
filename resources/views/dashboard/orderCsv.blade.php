@@ -62,53 +62,16 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-
-
-                        <div class="material-datatables">
-                            <table id="datatables" class="table table-striped table-no-bordered table-hover"
-                                   cellspacing="0" width="100%" style="width:100%">
-                                <thead>
-                                <tr>
-                                    <th>UserName</th>
-                                    <th>Amount</th>
-                                    <th>Company Name</th>
-                                    <th>Cards</th>
-                                    <th>Created at</th>
-                                    <th>Updated at</th>
-                                    <th class="disabled-sorting text-right">Actions</th>
-                                </tr>
-                                </thead>
-                                <tfoot>
-                                <tr>
-                                    <th>UserName</th>
-                                    <th>Amount</th>
-                                    <th>Company Name</th>
-                                    <th>Cards</th>
-                                    <th>Created at</th>
-                                    <th>Updated at</th>
-                                    <th class="text-right">Actions</th>
-                                </tr>
-                                </tfoot>
-                                <tbody>
-                                @foreach($orders as $order)
-                                    <tr>
-                                        <td>{{$order->customer->user_name or 'Wireless Customer' }}</td>
-                                        <td>{{$order->amount}}</td>
-                                        <td>{{$order->company}}</td>
-                                        <td>{{$order['cards']}}</td>
-                                        <td>{{$order->created_at}}</td>
-                                        <td>{{$order->updated_at}}</td>
-                                        <td class="text-right">
-                                            <a href="/dashboard/order/view/{{$order->id}}" class="btn btn-simple btn-warning btn-icon "><i
-                                                        class="material-icons">dvr</i></a>
-                                            {{--<a href="/dashboard/ftth/delete/{{$order->id}}" class="btn btn-simple btn-danger btn-icon "><i--}}
-                                            {{--class="material-icons">close</i></a>--}}
-                                        </td>
-                                    </tr>
-                                @endforeach
-                                </tbody>
-                            </table>
+                            <div class="form-group label-floating is-empty">
+                                <label class="control-label"></label>
+                                <select name="type" class="selectpicker"
+                                        data-style="btn btn-linkedin btn-round" title="Choose Type"
+                                        data-size="7" tabindex="-98">
+                                    <option disabled="" selected="" value="">Choose type</option>
+                                    <option value="ftth">ftth</option>
+                                    <option value="wireless">wireless</option>
+                                </select>
+                            </div>
                         </div>
 
 

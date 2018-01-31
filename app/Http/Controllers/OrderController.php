@@ -47,10 +47,10 @@ class OrderController extends Controller
     public function ordersCsvView()
     {
         $orders = Order::all();
-        foreach ($orders as $transaction){
+        foreach ($orders as $transaction) {
             $arr = '| ';
-            foreach ($transaction['items'] as $key=>$item){
-                $arr = $arr .  Card::find($item)['name'] .' x '.$transaction['quantities'][$key].' | ';
+            foreach ($transaction['items'] as $key => $item) {
+                $arr = $arr . Card::find($item)['name'] . ' x ' . $transaction['quantities'][$key] . ' | ';
                 $transaction['cards'] = $arr;
             }
             $transaction['items'] = serialize($transaction['items']);
@@ -62,22 +62,42 @@ class OrderController extends Controller
 
     public function ordersCsv(Request $request)
     {
+
         $now = Carbon::now();
         $now = Carbon::parse($now);
         $to = Carbon::parse($request->to);
         $from = Carbon::parse($request->from);
         $name = $now . 'transactionExcel';
-        $transactions = Order::all();
-        if (Input::get('submit') == 'Export According Time') {
-            $transactions = Order::where('created_at', '>=', $from)->where('created_at', '<=', $to)->where('status', '!=', 'غير مكتمل')->get();
-            if ($transactions->count() == 0)
-                return redirect('/dashboard/orders/csv')->with('message', 'لا يوجد حوالات بين الفترات المختارة');
+        if ($request->type) {
+            $transactions = Order::where('status', '!=', 'uncompleted')
+                ->where('type', '=', $request->type)->get();
+        } else {
+            $transactions = Order::where('status', '!=', 'uncompleted')->get();
         }
 
-        foreach ($transactions as $transaction){
+        if (Input::get('submit') == 'Export According Time') {
+
+            if ($request->type) {
+                $transactions = Order::where('created_at', '>=', $from)
+                    ->where('created_at', '<=', $to)
+                    ->where('type', '=', $request->type)
+                    ->where('status', '!=', 'uncompleted')
+                    ->get();
+            } else {
+                $transactions = Order::where('created_at', '>=', $from)
+                    ->where('created_at', '<=', $to)
+                    ->where('status', '!=', 'uncompleted')
+                    ->get();
+            }
+            if ($transactions->count() == 0)
+                return redirect('/dashboard/orders/csv')
+                    ->with('message', 'لا يوجد حوالات بين الفترات المختارة');
+        }
+
+        foreach ($transactions as $transaction) {
             $arr = '| ';
-            foreach ($transaction['items'] as $key=>$item){
-                $arr = $arr .  Card::find($item)['name'] .' x '.$transaction['quantities'][$key].' | ';
+            foreach ($transaction['items'] as $key => $item) {
+                $arr = $arr . Card::find($item)['name'] . ' x ' . $transaction['quantities'][$key] . ' | ';
                 $transaction['cards'] = $arr;
             }
             $transaction['items'] = serialize($transaction['items']);

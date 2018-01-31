@@ -46,6 +46,17 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="row">
+                                <label class="col-sm-2 label-on-left">The Name</label>
+                                <div class="col-sm-10">
+                                    <div class="form-group label-floating is-empty">
+                                        <label class="control-label"></label>
+                                        <input name="name" type="text" class="form-control" value="{{ old('name') }}"
+                                               required/>
+                                        <span class="help-block">Enter Value ...</span>
+                                    </div>
+                                </div>
+                            </div>
 
                             <div class="col-md-3 col-md-offset-1 col-sm-2">
                                 <button type="submit" class="btn btn-fill btn-rose">Submit
@@ -64,14 +75,14 @@
                                 <thead>
                                 <tr>
                                     <th>Value</th>
-
+                                    <th>Name</th>
                                     <th class="disabled-sorting text-right">Actions</th>
                                 </tr>
                                 </thead>
                                 <tfoot>
                                 <tr>
                                     <th>Value</th>
-
+                                    <th>Name</th>
                                     <th class="text-right">Actions</th>
                                 </tr>
                                 </tfoot>
@@ -79,10 +90,10 @@
                                 @foreach($wireless as $item)
                                     <tr>
                                         <td>{{$item->value}}</td>
-
+                                        <td>{{$item->name}}</td>
                                         <td class="text-right">
-                                            {{--<a href="/dashboard/order/view/{{$item->id}}" class="btn btn-simple btn-warning btn-icon "><i--}}
-                                            {{--class="material-icons">dvr</i></a>--}}
+                                            <a href="/dashboard/value/edit/{{$item->id}}" class="btn btn-simple btn-warning btn-icon "><i
+                                            class="material-icons">dvr</i></a>
                                             <a href="/dashboard/wireless/delete/{{$item->id}}"
                                                class="btn btn-simple btn-danger btn-icon "><i
                                                         class="material-icons">close</i></a>
@@ -95,8 +106,6 @@
                         </div>
                         </div>
                     </div>
-
-                </form>
             </div>
 
             <!-- end card -->

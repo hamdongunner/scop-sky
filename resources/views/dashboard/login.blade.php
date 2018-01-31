@@ -27,35 +27,27 @@
     <div class="full-page register-page" filter-color="black" data-image="/assets/img/register.jpeg">
         <div class="container">
             <div class="row">
+                @if($errors->count() >0)
+                    <div class="alert alert-danger">
+                        @foreach($errors->all() as $error)
+                            <li>{{$error}}</li>
+                        @endforeach
+                    </div>
+                @endif
                 <div class="col-md-10 col-md-offset-1">
+
                     <div class="card card-signup">
                         <div class="row">
                             <div class="col-md-6 col-md-offset-3 text-center">
                                 <img align="middle" style="width: 300px;margin-bottom: -90px;margin-top: 40px;" src="/assets/img/scope.png" alt=""/>
                             </div>
                         </div>
+
                         <div class="row">
-                            <br>
-                            @if($errors->count() >0)
-                                <div class="alert alert-danger">
-                                    @foreach($errors->all() as $error)
-                                        <li>{{$error}}</li>
-                                    @endforeach
-                                </div>
-                            @endif
-                            <br>
                             <div class="col-md-12">
                                 <br>
                                 <form class="form" method="POST" action="/auth">
                                     {{csrf_field()}}
-                                    <br>
-                                    @if($errors->count() >0)
-                                        <div class="alert alert-danger">
-                                            @foreach($errors->all() as $error)
-                                                <li>{{$error}}</li>
-                                            @endforeach
-                                        </div>
-                                    @endif
                                     <br>
                                     <div class="card-content">
                                         <div class="input-group">

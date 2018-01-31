@@ -26,7 +26,7 @@ class CustomerController extends Controller
             'phone'=>'required',
             'address'=>'required | string',
             'cabinet_number'=>'required',
-            'company'=>'required'
+            'type'=>'required',
         ]);
 
         if ($validator->fails())
@@ -39,6 +39,7 @@ class CustomerController extends Controller
         $customer->last_name = $request->last_name;
         $customer->phone = $request->phone;
         $customer->company = $request->company;
+        $customer->type = $request->type;
         $customer->address = $request->address;
         $customer->cabinet_number = $request->cabinet_number;
         $customer->save();
@@ -68,7 +69,7 @@ class CustomerController extends Controller
             'phone'=>'required',
             'address'=>'required | string',
             'cabinet_number'=>'required',
-            'company'=>'required'
+            'type'=>'required'
         ]);
 
         if ($validator->fails())
@@ -80,12 +81,15 @@ class CustomerController extends Controller
         $customer->first_name = $request->first_name;
         $customer->last_name = $request->last_name;
         $customer->phone = $request->phone;
-        $customer->company = $request->company;
+        $customer->company_id = $request->company;
+        $customer->type = $request->type;
         $customer->address = $request->address;
         $customer->cabinet_number = $request->cabinet_number;
         $customer->update();
         return redirect()->back()->with('message','You Have Been Edited The FTTH Reseller');
     }
+
+
 }
 
 

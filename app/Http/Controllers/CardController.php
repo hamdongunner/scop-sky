@@ -105,6 +105,7 @@ class CardController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'value' => 'required | numeric',
+            'name' => 'required | string',
         ]);
 
         if ($validator->fails())
@@ -112,6 +113,7 @@ class CardController extends Controller
 
         $wireless = new Wireless;
         $wireless->value = $request->value;
+        $wireless->name = $request->name;
         $wireless->save();
         return redirect()->back()->with('message','Done');
     }
@@ -121,6 +123,31 @@ class CardController extends Controller
         $wireless = Wireless::find($id);
         $wireless->delete();
         return redirect()->back();
+    }
+
+    public function ValueEdit($id)
+    {
+        $wireless = Wireless::find($id);
+
+        return View('dashboard.wirelessEdit',compact('wireless'));
+    }
+
+    public function ValueEditPost(Request $request, $id)
+    {
+        $validator = Validator::make($request->all(), [
+            'value' => 'required | numeric',
+            'name' => 'required | string',
+        ]);
+
+        if ($validator->fails())
+            return back()->withErrors($validator->errors())->withInput();
+
+        $wireless = Wireless::find($id);
+        $wireless->value = $request->value;
+        $wireless->name = $request->name;
+        $wireless->save();
+
+        return redirect()->back()->with('message','You Have been Edit The Value');
     }
 
 }

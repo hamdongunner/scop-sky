@@ -59,7 +59,7 @@
                                                     <option disabled="" selected="">{{ __('lang.p2_amount') }}</option>
 
                                                 @foreach($wireless as $item)
-                                                        <option value="{{$item->value}}">{{$item->value}}</option>
+                                                        <option value="{{$item->value}}">( {{$item->name}} ) {{$item->value}} IQD</option>
                                                     @endforeach
                                                 </select></div>
                                         </div>

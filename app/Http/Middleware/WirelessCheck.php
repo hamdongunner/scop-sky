@@ -5,8 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Support\Facades\Auth;
 
-
-class CustomerCheck
+class WirelessCheck
 {
     /**
      * Handle an incoming request.
@@ -17,7 +16,7 @@ class CustomerCheck
      */
     public function handle($request, Closure $next)
     {
-        if (!Auth::guard('app')->check() || Auth::guard('app')->user()->type  != 'ftth')
+        if (!Auth::guard('app')->check() || Auth::guard('app')->user()->type != 'wireless')
             return redirect('/login');
         return $next($request);
     }

@@ -6,6 +6,8 @@ return [
     'p1_wireless' =>'Wireless',
     'p1_ftth'=>'FTTH',
     'p1_choose_button' => 'Choose',
+    'p1_faq'=>'FAQ',
+    'p1_logout'=>' Logout',
 
     'p2_amount'=>'The Amount',
     'p2_company'=>'The Company',

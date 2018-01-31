@@ -110,7 +110,7 @@ class DashController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'email'=>'required | email | unique:users',
-            'name'=>'required',
+            'name'=>'required | string',
             'password'=>'required|min:6',
             're_password'=>'required|same:password',
             'is_admin'=>'required',
@@ -137,7 +137,7 @@ class DashController extends Controller
     public function adminEdit(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [
-            'email'=>'required | email | unique:users',
+            'email'=>'required | email',
             'name'=>'required | string',
             'password'=>'required|min:6',
             're_password'=>'required|same:password',

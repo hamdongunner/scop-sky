@@ -18,6 +18,8 @@ use \Exception;
 use GuzzleHttp\Client;
 use \Firebase\JWT\JWT;
 use Symfony\Component\HttpKernel\EventListener\ExceptionListener;
+use Closure;
+
 
 class HomeController extends Controller
 {
@@ -60,8 +62,12 @@ class HomeController extends Controller
         $lang = session()->get('language');
         App::setLocale($lang);
 
-        if (Auth::guard('app')->check())
-            return redirect('ftth');
+        if (Auth::guard('app')->check()) {
+            if (Auth::guard('app')->user()->type == 'wireless')
+                return redirect('/wireless');
+            if (Auth::guard('app')->user()->type == 'ftth')
+                return redirect('/ftth');
+        }
         return View('app.login');
     }
 
@@ -74,8 +80,9 @@ class HomeController extends Controller
 
         if ($validator->fails())
             return back()->withErrors($validator->errors())->withInput();
+
         $cred = $request->only('user_name', 'password');
-        if (Auth::guard('app')->attempt($cred, true)) {
+        if (Auth::guard('app')->attempt($cred, false)) {
             return redirect('/ftth');
         }
         return back()->withErrors(['Wrong Password Or Email'])->withInput();
@@ -97,19 +104,19 @@ class HomeController extends Controller
             return redirect()->back();
         return View('app.ftthCheckout', compact('items', 'amount', 'IQD'));
     }
-
-    public function checkoutView()
-    {
-        $lang = 'ar-KW';
-        $lang = session()->get('language');
-        App::setLocale($lang);
-
-        $amount = 0;
-        $price = Session::get('price');
-        if ($amount == 0)
-            return redirect()->back()->with('message', 'السلة فارغ ');
-        return View('app.checkout', compact('price', 'amount'));
-    }
+//
+//    public function checkoutView()
+//    {
+//        $lang = 'ar-KW';
+//        $lang = session()->get('language');
+//        App::setLocale($lang);
+//
+//        $amount = 0;
+//        $price = Session::get('price');
+//        if ($amount == 0)
+//            return redirect()->back()->with('message', 'السلة فارغ ');
+//        return View('app.checkout', compact('price', 'amount'));
+//    }
 
 
     public function checkout()
@@ -130,13 +137,13 @@ class HomeController extends Controller
         $order->items = $items;
         $order->quantities = $quantities;
         $order->amount = $amount;
-        $order->type = 'FTTH';
+        $order->type = 'ftth';
         $order->user_id = 0;
 //        if (!Auth::guard('app')->check()){
         $order->user_id = Auth::guard('app')->user()->id;
         $order->company = Auth::guard('app')->user()->company;
 //        }
-        $order->status = 'new';
+        $order->status = 'uncompleted';
         $order->save();
         $this->charge($order->amount, 'ScopeSky', $order->id);
 
@@ -155,6 +162,7 @@ class HomeController extends Controller
         App::setLocale($lang);
         $var = __('lang.p2_choose_company');
 
+
         if ($validator->fails())
             return back()->with('message', $var);
 
@@ -165,8 +173,9 @@ class HomeController extends Controller
         $order->items = $items;
         $order->quantities = $quantities;
         $order->amount = $request->value;
-        $order->type = 'WIRELESS';
+        $order->type = 'wireless';
         $order->user_id = 0;
+        $order->user_id = Auth::guard('app')->user()->id;
         $order->company = $company->name;
         $order->status = 'uncompleted';
         $order->save();
@@ -194,7 +203,6 @@ class HomeController extends Controller
 
     private function encode($amount, $service_type, $order_id)
     {
-        dd(route('redirect'));
         $secret = $_ENV['ZC_SECRET'];
         $now = new DateTime();
         $payload = [
@@ -280,7 +288,7 @@ class HomeController extends Controller
             $lang = session()->get('language');
         App::setLocale($lang);
 
-        return redirect('/'.$lang);
+        return redirect('/' . $lang);
     }
 
     public function decode($token)
@@ -369,5 +377,11 @@ class HomeController extends Controller
         return ['count' => $count, 'carts' => $carts];
     }
 
+
+    public function logout()
+    {
+        Auth::guard('app')->logout();
+        return redirect('/login');
+    }
 
 }

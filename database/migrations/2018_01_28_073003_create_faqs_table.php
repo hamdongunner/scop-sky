@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateWirelessesTable extends Migration
+class CreateFaqsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateWirelessesTable extends Migration
      */
     public function up()
     {
-        Schema::create('wirelesses', function (Blueprint $table) {
+        Schema::create('faqs', function (Blueprint $table) {
             $table->increments('id');
-            $table->double('value');
-            $table->string('name');
+            $table->longText('text');
+            $table->string('lang');
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ class CreateWirelessesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('wirelesses');
+        Schema::dropIfExists('faqs');
     }
 }

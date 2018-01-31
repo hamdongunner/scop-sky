@@ -9,9 +9,8 @@
 Route::get('/', 'HomeController@index');
 Route::get('login', 'HomeController@loginView');
 Route::post('login', 'HomeController@login');
-Route::get('wireless', 'HomeController@getWirelessView');
-Route::get('wireless/checkout', 'HomeController@checkoutView');
-Route::post('wireless/checkout', 'HomeController@checkoutWireless');
+Route::get('logout', 'HomeController@logout');
+Route::get('faq', 'FaqController@view');
 Route::get('redirect', 'HomeController@checkRedirect')->name('redirect');
 Route::get('flush', 'HomeController@flush');
 ///--------------------------------------------- VUE
@@ -36,6 +35,17 @@ Route::group(['middleware' => 'customer'], function () {
     Route::get('ftth/checkout', 'HomeController@checkoutFtthView');
     Route::post('ftth/checkout', 'HomeController@checkout');
 
+});
+/*
+ |--------------------------------------------------------------------------
+ |     CUSTOMER     CUSTOMER     CUSTOMER     CUSTOMER     CUSTOMER
+ |--------------------------------------------------------------------------
+ */
+Route::group(['middleware' => 'wirelessCustomer'], function () {
+
+    Route::get('wireless', 'HomeController@getWirelessView');
+//    Route::get('wireless/checkout', 'HomeController@checkoutView');
+    Route::post('wireless/checkout', 'HomeController@checkoutWireless');
 });
 /*
  |--------------------------------------------------------------------------
@@ -77,6 +87,8 @@ Route::group(['middleware' => 'superadmin', 'prefix' => 'dashboard'], function (
     Route::get('card/delete/{id}', 'CardController@cardDelete');
     Route::get('value', 'CardController@valueView');
     Route::post('value', 'CardController@value');
+    Route::get('value/edit/{id}', 'CardController@ValueEdit');
+    Route::post('value/edit/{id}', 'CardController@ValueEditPost');
     ///--------------------------------------------- COMPANIES
     Route::get('companies', 'DashController@companies');
     Route::get('company/add', 'CompanyController@companyAddView');
@@ -93,6 +105,10 @@ Route::group(['middleware' => 'superadmin', 'prefix' => 'dashboard'], function (
     Route::get('ftth/delete/{id}', 'CustomerController@ftthDelete');
     ///--------------------------------------------- Wireless
     Route::get('wireless/delete/{id}', 'CardController@WirelessDelete');
+    Route::get('wireless/user/add', 'CustomerController@wirelessUserAdd');
+    ///--------------------------------------------- FAQ
+    Route::get('faq/index', 'FaqController@index');
+    Route::post('faq/edit', 'FaqController@add');
 });
 
 

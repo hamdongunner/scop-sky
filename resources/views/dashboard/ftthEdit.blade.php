@@ -7,7 +7,7 @@
 
 
 @section('content')
-    <div class="content">
+    <div id="root" class="content">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-md-10 col-md-offset-1">
@@ -61,7 +61,7 @@
                                         <div class="form-group label-floating is-empty">
                                             <label class="control-label"></label>
                                             <input name="user_name" type="text" class="form-control"
-                                                   required value="{{ $customer->user_name }}" />
+                                                   required value="{{ $customer->user_name }}"/>
                                             <span class="help-block">Enter the User Name ...</span>
                                         </div>
                                     </div>
@@ -72,7 +72,7 @@
                                         <div class="form-group label-floating is-empty">
                                             <label class="control-label"></label>
                                             <input id="password" name="password" type="password" class="form-control"
-                                                   required value="" />
+                                                   required value="{{ old('password') }}"/>
                                             <span class="help-block">Enter The Password ...</span>
                                         </div>
                                     </div>
@@ -82,8 +82,9 @@
                                     <div class="col-sm-10">
                                         <div class="form-group label-floating is-empty">
                                             <label class="control-label"></label>
-                                            <input id="re_password" name="re_password" type="password" class="form-control"
-                                                   required />
+                                            <input id="re_password" name="re_password" type="password"
+                                                   class="form-control"
+                                                   required/>
                                             <span class="help-block">Enter The Password ...</span>
                                         </div>
                                     </div>
@@ -105,7 +106,7 @@
                                         <div class="form-group label-floating is-empty">
                                             <label class="control-label"></label>
                                             <input name="address" type="text" class="form-control"
-                                                   required value="{{ $customer->address }}" />
+                                                   required value="{{ $customer->address }}"/>
                                             <span class="help-block">Enter the Address ...</span>
                                         </div>
                                     </div>
@@ -116,24 +117,33 @@
                                         <div class="form-group label-floating is-empty">
                                             <label class="control-label"></label>
                                             <input name="cabinet_number" type="number" class="form-control"
-                                                   required value="{{ $customer->cabinet_number }}" />
+                                                   required value="{{ $customer->cabinet_number }}"/>
                                             <span class="help-block">Enter the Cabinet Number ...</span>
                                         </div>
                                     </div>
                                 </div>
 
-                                <div class="row">
+                                <div v-if="companyShow" class="row">
                                     <label class="col-sm-2 label-on-left">Company Name</label>
                                     <div class="col-sm-10">
                                         <div class="form-group label-floating is-empty">
                                             <label class="control-label"></label>
-                                            <input name="company" type="number" class="form-control"
-                                                   required value="{{ $customer->company }}" />
-                                            <span class="help-block">Enter the Company Nane ...</span>
+                                            <input name="company" type="text" class="form-control"
+                                                   required value="{{ $customer->company }}"/>
+                                            <span class="help-block">Enter the Company Name ...</span>
                                         </div>
                                     </div>
                                 </div>
-
+                                <div class="form-group label-floating is-empty">
+                                    <label class="control-label"></label>
+                                    <select v-on:change="typeCheck" required name="type" class="selectpicker"
+                                            data-style="btn btn-linkedin btn-round" title="Choose Type"
+                                            data-size="7" tabindex="-98">
+                                        <option disabled="" selected="">Choose type</option>
+                                        <option value="ftth">ftth</option>
+                                        <option value="wireless">wireless</option>
+                                    </select>
+                                </div>
                                 <br>
                                 <button type="submit" class="btn btn-fill btn-rose">Submit
                                     <div class="ripple-container"></div>
@@ -150,8 +160,8 @@
         var password = document.getElementById("password")
             , confirm_password = document.getElementById("re_password");
 
-        function validatePassword(){
-            if(password.value != confirm_password.value) {
+        function validatePassword() {
+            if (password.value != confirm_password.value) {
                 confirm_password.setCustomValidity("Passwords Don't Match");
             } else {
                 confirm_password.setCustomValidity('');
@@ -161,4 +171,11 @@
         password.onchange = validatePassword;
         confirm_password.onkeyup = validatePassword;
     </script>
+@endsection
+
+
+
+
+@section('js')
+    <script src="/vue/dash.js"></script>
 @endsection

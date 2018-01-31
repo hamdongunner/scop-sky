@@ -4,7 +4,7 @@
 @section('content')
     <div style="background: #fff" class="wrapper wrapper-full-page">
         <div style="background: #fff" class="full-page login-page" filter-color="black"
-             data-image="../../assets/img/login.jpeg">
+             data-image="/assets/img/login.jpeg">
             <!--   you can change the color of the filter page using: data-color="blue | purple | green | orange | red | rose " -->
             <div style="background: #fff" class="content">
                 <div class="container">
@@ -53,8 +53,10 @@
                                         </div>
                                     </div>
                                     <div class="footer text-center">
-                                        <button type="submit" class="btn btn-rose btn-simple btn-wd btn-lg">Let's go
+                                        <button type="submit" class="btn btn-success btn-simple btn-wd btn-lg">Let's go
                                         </button>
+                                       <a href="/" class="btn btn-rose btn-simple btn-wd btn-lg">Back
+                                        </a>
                                     </div>
                                 </div>
                             </form>
