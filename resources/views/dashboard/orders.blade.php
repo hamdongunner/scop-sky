@@ -53,14 +53,20 @@
                                     </tfoot>
                                     <tbody>
                                     @foreach($orders as $order)
-                                        <tr>
+                                        <tr>                         
                                             <td>{{$order->customer->user_name or 'Wireless Customer' }}</td>
                                             <td>{{$order->msisdn}}</td>
                                             <td>{{$order->amount}}</td>
                                             <td>{{$order->company}}</td>
                                             <td>{{$order['cards']}}</td>
                                             <td>{{$order->type}}</td>
-                                            <td>{{$order->status}}</td>
+                                            @if($order->status == 'new')
+                                            <td style="background-color: #ffe259;">{{$order->status}}</td>
+                                            @elseif($order->status == 'Done') 
+                                            <td style="background-color:#22c1c3;">{{$order->status}}</td>                                            
+                                            @else
+                                            <td style="background-color: #C6426E;">{{$order->status}}</td>
+                                            @endif
                                             <td>{{$order->created_at}}</td>
                                             <td>{{$order->updated_at}}</td>
                                             <td class="text-right">

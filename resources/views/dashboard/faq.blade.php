@@ -28,7 +28,7 @@
                     {{ csrf_field() }}
 
                     <div class="card-header card-header-text" data-background-color="purple">
-                        <h4 class="card-title">Wireless Value</h4>
+                        <h4 class="card-title">FAQ</h4>
                     </div>
 
                     {{ csrf_field() }}
@@ -40,7 +40,7 @@
                                 <div class="form-group label-floating is-empty">
                                     <label class="control-label"></label>
                                     <textarea rows="24" cols="50" name="arabic" class="form-control"
-                                              required>{{$arabic->text}}</textarea>
+                                              required>{{$arabic['text']}}</textarea>
                                     <span class="help-block">Enter Arabic ...</span>
                                 </div>
                             </div>
@@ -51,7 +51,7 @@
                                 <div class="form-group label-floating is-empty">
                                     <label class="control-label"></label>
                                     <textarea rows="24" cols="50" name="english" class="form-control"
-                                              required>{{$english->text}}</textarea>
+                                              required>{{$english['text']}}</textarea>
                                     <span class="help-block">Enter English ...</span>
                                 </div>
                             </div>

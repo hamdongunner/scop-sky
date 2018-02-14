@@ -54,13 +54,19 @@
                                         <tr>
                                             <td>{{$admin->name}}</td>
                                             <td>{{$admin->email}}</td>
-                                            <td>{{$admin->type}}</td>
+                                            @if($admin->is_admin)
+                                                <td>Super Admin</td>
+                                            @else
+                                                <td>Viewer</td>
+                                            @endif
                                             <td>{{$admin->created_at}}</td>
                                             <td>{{$admin->updated_at}}</td>
                                             <td class="text-right">
-                                                <a href="/dashboard/admin/edit/{{$admin->id}}" class="btn btn-simple btn-warning btn-icon"><i
+                                                <a href="/dashboard/admin/edit/{{$admin->id}}"
+                                                   class="btn btn-simple btn-warning btn-icon"><i
                                                             class="material-icons">dvr</i></a>
-                                                <a href="/dashboard/admin/delete/{{$admin->id}}" class="btn btn-simple btn-danger btn-icon "><i
+                                                <a href="/dashboard/admin/delete/{{$admin->id}}"
+                                                   class="btn btn-simple btn-danger btn-icon "><i
                                                             class="material-icons">close</i></a>
                                             </td>
                                         </tr>

@@ -20,7 +20,7 @@
                         <div class="col-md-4 col-sm-6 col-md-offset-4 col-sm-offset-3">
                             <div class="card card-login card-hidden">
                                 <div class="card-content rtl">
-                                    <h3>{{ __('lang.p1_faq') }}</h3>
+                                    <h3 style="text-align: center;">{{ __('lang.p1_faq') }}</h3>
                                     <br><br>
                                     <p style="direction: {{$d}}" >{{$faq->text}}</p>
                                 </div>

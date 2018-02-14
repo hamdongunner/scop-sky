@@ -46,7 +46,7 @@
                                     <div class="form-group label-floating is-empty">
                                         <label class="control-label"></label>
                                         <input disabled type="text" class="form-control"
-                                               value="{{ $order->company->name }}" required/>
+                                               value="{{ $order->company }}" required/>
                                     </div>
                                 </div>
                             </div>
@@ -74,7 +74,18 @@
                                     </div>
                                 </div>
                             </div>
-
+                            <div class="row">
+                                <label class="col-sm-2 label-on-left">Status</label>
+                                <div class="col-sm-10">
+                                    <div class="form-group label-floating is-empty">
+                                        <label class="control-label"></label>
+                                        <input disabled value="{{ $order->status }}" type="text" class="form-control"
+                                               required/>
+                                        <span class="help-block">Enter the Value of the card ...</span>
+                                    </div>
+                                </div>
+                            </div>
+                            @if($cards->count() > 0)
                             <div class="card-content">
                                 <div class="card-content">
                                     <div class="card-content">
@@ -86,7 +97,6 @@
                                                 <tr>
                                                     <th>Card Name</th>
                                                     <th>Value</th>
-                                                    <th>Type</th>
                                                     <th>Quantity</th>
                                                     <th>Created at</th>
                                                     <th>Updated at</th>
@@ -99,7 +109,7 @@
                                                     <tr>
                                                         <td>{{$card->name}}</td>
                                                         <td>{{$card->value}}</td>
-                                                        <td>{{$card->type}}</td>
+
                                                         <td>{{$quantity[$indexKey]}}</td>
                                                         <td>{{$card->created_at}}</td>
                                                         <td>{{$card->updated_at}}</td>
@@ -111,8 +121,9 @@
                                     </div>
                                 </div>
                             </div>
+                            @endif
                             <br>
-                            @if($order->status != 'Processed')
+                            @if($order->status != 'Done')
                                 <div class="col-md-3 col-md-offset-1 col-sm-2">
                                     <a href="/dashboard/order/status/processing/{{$order->id}}"
                                        class="btn btn-fill btn-primary">Processing
@@ -122,7 +133,7 @@
 
                                 <div class="col-md-3 col-md-offset-1 col-sm-2">
                                     <a href="/dashboard/order/status/processed/{{$order->id}}"
-                                       class="btn btn-fill btn-danger">Processed
+                                       class="btn btn-fill btn-danger">Done
                                         <div class="ripple-container"></div>
                                     </a>
                                 </div>

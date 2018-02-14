@@ -84,7 +84,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
-                    <a href="/dashboard/orders/csv"><div class="card-header card-header-icon" data-background-color="purple">
+                    <a href="/dashboard/orders"><div class="card-header card-header-icon" data-background-color="purple">
                             <h4 style="font-style: inherit">New Orders</h4>
                         </div></a>
                     <div class="card-content">
@@ -155,7 +155,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
-                    <a href="/dashboard/orders/csv"><div class="card-header card-header-icon" data-background-color="purple">
+                    <a href="/dashboard/orders"><div class="card-header card-header-icon" data-background-color="purple">
                             <h4 style="font-style: inherit">In Process</h4>
                         </div></a>
                     <div class="card-content">

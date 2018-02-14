@@ -29,7 +29,7 @@
                             {{ csrf_field() }}
 
                             <div class="card-header card-header-text" data-background-color="purple">
-                                <h4 class="card-title">Adding FTTH Reseller</h4>
+                                <h4 class="card-title">Adding Reseller</h4>
                             </div>
                             <div class="card-content">
 

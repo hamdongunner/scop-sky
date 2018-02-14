@@ -58,7 +58,7 @@
                             </div>
                             <div class="card-content">
                                 <h4 class="card-title">
-                                    <a href="#pablo">@{{ product.name }} @{{ product.value }} $</a>
+                                    <a href="#pablo">@{{ product.name }} @{{ product.value }} </a>
                                 </h4>
                                 <div class="card-description">
                                     @{{ product.description }}
@@ -84,7 +84,7 @@
                 </div>
             </div>
         </div>
-        <footer class="footer navbar-fixed-bottom">
+        <footer class="footer">
             <div class="container">
                 <nav class="pull-left">
                     <ul>

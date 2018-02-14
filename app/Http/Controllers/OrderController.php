@@ -28,8 +28,10 @@ class OrderController extends Controller
 
     public function orderProcessing($id)
     {
+
         $order = Order::find($id);
-        $order->status = 'Processing';
+        if($order->status != 'Done')
+            $order->status = 'Processing';
         $order->update();
 
         return redirect('/dashboard/order/view/' . $id);
