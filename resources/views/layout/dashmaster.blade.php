@@ -21,7 +21,7 @@
     <link href="/assets/css/bootstrap.min.css" rel="stylesheet"/>
     <!--  Material Dashboard CSS    -->
     <link href="/assets/css/material-dashboard.css?v=1.2.0" rel="stylesheet"/>
-    <!--  CSS for Demo Purpose, don't include it in your project     -->
+    <!--  CSS for Demo Purpose, dont include it in your project     -->
     <link href="/assets/css/demo.css" rel="stylesheet"/>
     <!--     Fonts and icons     -->
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
