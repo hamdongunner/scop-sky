@@ -47,22 +47,7 @@ var app = new Vue({
                 }
             });
         },
-        // getCart: function () {
-        //     $.ajax({
-        //         url: '/get-cart',
-        //         type: 'GET',
-        //         dataType: 'json',
-        //         success: function (results) {
-        //             console.log(results);
-        //             app.shoppingCount = results['count'];
-        //             app.shoppingCart = results['carts']
-        //         }
-        //     });
-        // },
 
-        hidde: function () {
-            console.log('here i am ');
-        },
         addToCart: function (index) {
             $.ajax({
                 url: '/cart-add/' + index,

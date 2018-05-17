@@ -58,35 +58,38 @@
                                                         data-style="btn btn-linkedin btn-round" tabindex="-98">
                                                     <option disabled="" selected="">{{ __('lang.p2_amount') }}</option>
 
-                                                @foreach($wireless as $item)
-                                                        <option value="{{$item->value}}">( {{$item->name}} ) {{$item->value}} IQD</option>
+                                                    @foreach($wireless as $item)
+                                                        <option value="{{$item->value}}">( {{$item->name}}) {{$item->value}} IQD
+                                                        </option>
                                                     @endforeach
                                                 </select></div>
                                         </div>
                                     </div>
-                                    <div class="col-xs-12 col-md-12">
-                                        <h3 style="margin-bottom: -10px;">{{ __('lang.p2_company') }}</h3>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-xs-10 col-xs-push-1">
-                                            <div class="form-group label-floating is-empty">
-                                                <label class="control-label"></label>
-                                                <select required name="company" class="selectpicker"
-                                                        data-style="btn btn-linkedin btn-round" title="Choose Company"
-                                                        data-size="7" tabindex="-98">
-                                                    <option disabled="" selected="">{{ __('lang.p2_choose_company') }}</option>
-                                                    @foreach($companies as $company)
-                                                        <option value="{{$company->id}}">{{$company->name}}</option>
-                                                    @endforeach
-                                                </select></div>
-                                        </div>
-                                    </div>
+                                    {{--<div class="col-xs-12 col-md-12">--}}
+                                        {{--<h3 style="margin-bottom: -10px;">{{ __('lang.p2_company') }}</h3>--}}
+                                    {{--</div>--}}
+                                    {{--<div class="row">--}}
+                                        {{--<div class="col-xs-10 col-xs-push-1">--}}
+                                            {{--<div class="form-group label-floating is-empty">--}}
+                                                {{--<label class="control-label"></label>--}}
+                                                {{--<select required name="company" class="selectpicker"--}}
+                                                        {{--data-style="btn btn-linkedin btn-round" title="Choose Company"--}}
+                                                        {{--data-size="7" tabindex="-98">--}}
+                                                    {{--<option disabled=""--}}
+                                                            {{--selected="">{{ __('lang.p2_choose_company') }}</option>--}}
+                                                    {{--@foreach($companies as $company)--}}
+                                                        {{--<option value="{{$company->id}}">{{$company->name}}</option>--}}
+                                                    {{--@endforeach--}}
+                                                {{--</select></div>--}}
+                                        {{--</div>--}}
+                                    {{--</div>--}}
                                     <br>
                                     <br>
                                     <div class="col-md-12">
                                         <div style="background: #ea4c89 !important;" class="card-avatar">
-                                            <button style="background: #ea4c89 !important; border: #ea4c89 !important;"  type="submit">
-                                                <img style="background: rgb(234, 76, 137) !important;"class="img"
+                                            <button style="background: #ea4c89 !important; border: #ea4c89 !important;"
+                                                    type="submit">
+                                                <img style="background: rgb(234, 76, 137) !important;" class="img"
                                                      src="/assets/img/faces/card-profile1-square.png"/>
                                             </button>
                                         </div>

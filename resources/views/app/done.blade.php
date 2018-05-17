@@ -84,6 +84,3 @@
 @section('js')
     <script src="/vue/main.js"></script>
 @endsection
-
-
-

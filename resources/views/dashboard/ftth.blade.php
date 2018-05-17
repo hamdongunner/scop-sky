@@ -17,7 +17,7 @@
                             </div>
                         </a>
                         <div class="card-content">
-                            <h4 class="card-title">FTTH Reseller</h4>
+                            <h4 class="card-title">The Reseller</h4>
                             <div class="toolbar">
                                 <!--        Here you can write extra buttons/actions for the toolbar              -->
                             </div>

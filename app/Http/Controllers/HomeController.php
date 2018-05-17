@@ -153,20 +153,13 @@ class HomeController extends Controller
     public function checkoutWireless(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'company' => 'required | numeric',
             'value' => 'required | numeric',
         ]);
 
         $lang = 'ar-KW';
         $lang = session()->get('language');
         App::setLocale($lang);
-        $var = __('lang.p2_choose_company');
-
-
-        if ($validator->fails())
-            return back()->with('message', $var);
-
-        $company = Company::find($request->company);
+        
         $items = [];
         $quantities = [];
         $order = new Order;
@@ -176,7 +169,7 @@ class HomeController extends Controller
         $order->type = 'wireless';
         $order->user_id = 0;
         $order->user_id = Auth::guard('app')->user()->id;
-        $order->company = $company->name;
+        $order->company = Auth::guard('app')->user()->company;
         $order->status = 'uncompleted';
         $order->save();
         $this->charge($order->amount, 'ScopeSky', $order->id);
@@ -199,8 +192,6 @@ class HomeController extends Controller
         $this->redirect($redirect_url);
     }
 
-//===
-
     private function encode($amount, $service_type, $order_id)
     {
         $secret = $_ENV['ZC_SECRET'];
@@ -220,6 +211,7 @@ class HomeController extends Controller
             $secret,
             'HS256'
         );
+        // dd($token);
         return $token;
     }
 
@@ -312,7 +304,6 @@ class HomeController extends Controller
     {
         $card = Card::findOrFail($id);
 
-//        session()->flush();
         $bool = true;
         $array = Session::get('cart');
 
@@ -324,12 +315,14 @@ class HomeController extends Controller
         }
 
         if ($bool)
-            $array[$id] = ['id' => $id,
+            $array[$id] = [
+                'id' => $id,
                 'quantity' => 1,
                 'name' => $card->name,
                 'type' => $card->type,
                 'value' => $card->value,
-                'image' => $card->image];
+                'image' => $card->image
+              ];
 
         session()->put('cart', $array);
         return Session::get('cart');
