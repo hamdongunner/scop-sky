@@ -27,18 +27,20 @@ class CustomerController extends Controller
             'address'=>'required | string',
             'cabinet_number'=>'required',
             'type'=>'required',
+            'company'=>'required',
         ]);
 
         if ($validator->fails())
             return back()->withErrors($validator->errors())->withInput();
 
+        $company = Company::find($request->company);
         $customer = new Customer;
         $customer->user_name = $request->user_name;
         $customer->password = bcrypt($request->password);
         $customer->first_name = $request->first_name;
         $customer->last_name = $request->last_name;
         $customer->phone = $request->phone;
-        $customer->company = $request->company;
+        $customer->company = $company->name;
         $customer->type = $request->type;
         $customer->address = $request->address;
         $customer->cabinet_number = $request->cabinet_number;

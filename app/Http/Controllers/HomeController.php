@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Banner;
 use App\Card;
 use App\Company;
 use App\Order;
@@ -32,7 +33,8 @@ class HomeController extends Controller
     {
         App::setLocale($lang);
         session(['language' => $lang]);
-        return view('app.index');
+        $banner = Banner::first();
+        return view('app.index',compact('banner'));
     }
 
     public function getWirelessView()
@@ -159,7 +161,7 @@ class HomeController extends Controller
         $lang = 'ar-KW';
         $lang = session()->get('language');
         App::setLocale($lang);
-        
+
         $items = [];
         $quantities = [];
         $order = new Order;

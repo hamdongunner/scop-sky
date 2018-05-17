@@ -18,9 +18,9 @@
                                     <a href="/faq">{{ __('lang.p1_faq') }}</a>
                                 </li>
                                 @if(Auth::guard('app')->check())
-                                <li style="list-style-type: none;">
-                                    <a href="/logout">{{ __('lang.p1_logout') }}</a>
-                                </li>
+                                    <li style="list-style-type: none;">
+                                        <a href="/logout">{{ __('lang.p1_logout') }}</a>
+                                    </li>
                                 @endif
                             </ul>
                         </li>
@@ -64,6 +64,11 @@
                             </div>
                         </div>
                     </div>
+                    @if($banner->text)
+                        <div class="alert alert-success">
+                            <p style="text-align: center">{{$banner->text}}</p>
+                        </div>
+                    @endif
                 </div>
 
             </div>

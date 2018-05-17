@@ -105,6 +105,14 @@
                             </p>
                         </a>
                     </li>
+
+                    <li class="@yield('banner')">
+                        <a href="/dashboard/banners">
+                            <i class="material-icons">mode_comment</i>
+                            <p> Banner
+                            </p>
+                        </a>
+                    </li>
                 @endif
             </ul>
         </div>

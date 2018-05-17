@@ -109,6 +109,11 @@ Route::group(['middleware' => 'superadmin', 'prefix' => 'dashboard'], function (
     ///--------------------------------------------- FAQ
     Route::get('faq/index', 'FaqController@index');
     Route::post('faq/edit', 'FaqController@add');
+    ///--------------------------------------------- BANNERS
+    Route::get('banners','FaqController@banners');
+    Route::post('banners/add','FaqController@bannersAdd');
+
+
 });
 
 
